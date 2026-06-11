@@ -1,0 +1,545 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="my-icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organic Chemistry Prep Methods</title>
+  <link rel="stylesheet" href="organic_chemistry_dark.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+</head>
+<body>
+  <div class="page-header">Organic Chem Preparations lol</div>
+<h2 class="sr-only">Interactive organic chemistry preparation methods for NEET — alcohols, phenols, ethers, aldehydes, ketones, and carboxylic acids with named reactions highlighted</h2>
+<div class="tabs" id="tabs">
+<button class="tab active" onclick="showTab('all')">All</button>
+<button class="tab" onclick="showTab('alcohols')">Alcohols</button>
+<button class="tab" onclick="showTab('phenols')">Phenols</button>
+<button class="tab" onclick="showTab('ethers')">Ethers</button>
+<button class="tab" onclick="showTab('ald')">Aldehydes</button>
+<button class="tab" onclick="showTab('ket')">Ketones</button>
+<button class="tab" onclick="showTab('carb')">Carboxylic Acids</button>
+</div>
+<input class="search-bar" id="search" placeholder="Search reactions, reagents, or named reactions..." oninput="filterSearch()" />
+<div id="content"></div>
+<script>
+const data = {
+alcohols: {
+  label: "Alcohols",
+  groups: [
+    {
+      title: "From Alkenes",
+      rxns: [
+        {name:"Acid-catalysed hydration of alkenes", named:false, niche:false,
+         reagents:"H₂O / H₂SO₄ (or H₃PO₄), heat",
+         equation:"CH₂=CH₂ + H₂O → CH₃CH₂OH",
+         mechanism:"Markovnikov addition; electrophilic addition via carbocation",
+         note:"Follows Markovnikov's rule. 1° alkenes give 2° alcohols (rearrangement possible).",
+         tip:"Most common industrial method for ethanol."},
+        {name:"Hydroboration–Oxidation (Brown's reaction)", named:true, niche:false,
+         reagents:"BH₃·THF, then H₂O₂/NaOH",
+         equation:"R-CH=CH₂ → R-CH₂-CH₂OH",
+         mechanism:"Syn addition; B adds to less substituted C (anti-Markovnikov)",
+         note:"Anti-Markovnikov, syn addition, retention of configuration.",
+         tip:"Key NEET distinction: anti-Markovnikov + no rearrangement."},
+        {name:"Oxymercuration–Demercuration", named:true, niche:true,
+         reagents:"Hg(OAc)₂/H₂O, then NaBH₄",
+         equation:"Alkene → Markovnikov alcohol (anti-addition)",
+         mechanism:"Mercurinium ion intermediate; anti addition",
+         note:"Markovnikov, but no carbocation rearrangement. Rarely asked but appears in niche MCQs.",
+         tip:""},
+      ]
+    },
+    {
+      title: "From Aldehydes & Ketones",
+      rxns: [
+        {name:"Reduction by NaBH₄ or LiAlH₄", named:false, niche:false,
+         reagents:"NaBH₄ (mild) or LiAlH₄ (strong), then H₃O⁺",
+         equation:"RCHO → RCH₂OH (1°) | R₂CO → R₂CHOH (2°)",
+         mechanism:"Hydride transfer (nucleophilic addition)",
+         note:"NaBH₄ reduces aldehydes/ketones only. LiAlH₄ also reduces esters, acids, amides.",
+         tip:"LiAlH₄ is a stronger, less selective reducer than NaBH₄."},
+        {name:"Grignard reaction", named:true, niche:false,
+         reagents:"RMgX (Grignard reagent), then H₃O⁺",
+         equation:"HCHO + RMgX → RCH₂OH | RCHO + R'MgX → R'R CHOH | Ketone + RMgX → Tertiary alcohol",
+         mechanism:"Nucleophilic addition of carbanion to carbonyl",
+         note:"HCHO→1°, RCHO→2°, Ketone→3° alcohol. React with CO₂ → Carboxylic acid.",
+         tip:"Extremely important for synthesis problems in NEET."},
+      ]
+    },
+    {
+      title: "From Alkyl Halides",
+      rxns: [
+        {name:"Hydrolysis (SN1/SN2)", named:false, niche:false,
+         reagents:"Aq. NaOH or H₂O (moist Ag₂O)",
+         equation:"R-X + NaOH → R-OH + NaX",
+         mechanism:"SN2 for 1° RX; SN1 for 3° RX",
+         note:"1° → SN2 (inversion); 3° → SN1 (racemisation).",
+         tip:""},
+      ]
+    },
+    {
+      title: "From Esters & Carboxylic Acids",
+      rxns: [
+        {name:"Ester hydrolysis (acidic or basic)", named:false, niche:false,
+         reagents:"H₂O/H⁺ or H₂O/OH⁻",
+         equation:"RCOOR' + H₂O → RCOOH + R'OH",
+         mechanism:"Acidic: reversible; Basic (saponification): irreversible",
+         note:"Basic hydrolysis is irreversible due to carboxylate salt formation.",
+         tip:""},
+        {name:"Reduction of carboxylic acids with LiAlH₄", named:false, niche:false,
+         reagents:"LiAlH₄, then H₃O⁺",
+         equation:"RCOOH → RCH₂OH",
+         mechanism:"Hydride delivery twice to same carbonyl",
+         note:"NaBH₄ cannot reduce COOH. Only LiAlH₄ works.",
+         tip:""},
+      ]
+    },
+    {
+      title: "Industrial & Miscellaneous",
+      rxns: [
+        {name:"Fermentation of glucose", named:false, niche:false,
+         reagents:"Zymase (enzyme from yeast), 25–30°C",
+         equation:"C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂",
+         mechanism:"Enzymatic glycolysis then pyruvate decarboxylation",
+         note:"Gives max ~14% ethanol; yeast dies above this.",
+         tip:""},
+        {name:"From primary amines (Van Leusen-type deamination)", named:true, niche:true,
+         reagents:"NaNO₂ + HCl (0°C), then H₂O/heat",
+         equation:"RNH₂ → RN₂⁺ Cl⁻ → ROH (via unstable diazonium)",
+         mechanism:"Diazonium salt is unstable for aliphatic; SN1 hydrolysis",
+         note:"Aliphatic diazonium is very unstable and gives alcohol directly by hydrolysis.",
+         tip:""},
+      ]
+    }
+  ]
+},
+phenols: {
+  label: "Phenols",
+  groups: [
+    {
+      title: "From Benzene Derivatives",
+      rxns: [
+        {name:"Dow process (from chlorobenzene)", named:true, niche:false,
+         reagents:"NaOH (aq), 300°C, 200 atm, then H⁺",
+         equation:"C₆H₅Cl + NaOH → C₆H₅ONa → C₆H₅OH",
+         mechanism:"Nucleophilic aromatic substitution (benzyne mechanism not required at NEET level)",
+         note:"Industrial method. High temp and pressure required.",
+         tip:"Chlorobenzene is much less reactive than alkyl halides towards NaOH."},
+        {name:"Cumene hydroperoxide process (Cumene process)", named:true, niche:false,
+         reagents:"Isopropylbenzene (cumene), O₂, then H₂SO₄",
+         equation:"Cumene → Cumene hydroperoxide → Phenol + Acetone",
+         mechanism:"Free radical oxidation, then acid-catalysed rearrangement",
+         note:"Most important industrial synthesis. Gives phenol + acetone as co-products.",
+         tip:"NEET loves asking: what is the co-product? Answer: Acetone (propanone)."},
+        {name:"Fusion of sodium benzenesulphonate with NaOH", named:false, niche:false,
+         reagents:"Alkali fusion: NaOH (solid), 300°C, then H⁺",
+         equation:"C₆H₅SO₃Na + NaOH → C₆H₅ONa + Na₂SO₃",
+         mechanism:"Nucleophilic displacement of sulphonate",
+         note:"Classic lab method. Strong nucleophile (OH⁻) displaces SO₃Na⁻.",
+         tip:""},
+        {name:"From diazonium salts (Sandmeyer/hydrolysis)", named:true, niche:false,
+         reagents:"Aniline + NaNO₂/HCl (0–5°C), then warm H₂O",
+         equation:"C₆H₅NH₂ → C₆H₅N₂⁺Cl⁻ → C₆H₅OH + N₂",
+         mechanism:"Arenediazonium salt hydrolysis (SN1 on aryl cation)",
+         note:"Diazotisation at 0–5°C is critical. Warming gives phenol.",
+         tip:"This connects amines → phenols. Very testable."},
+        {name:"From benzenediazonium fluoroborate (Balz–Schiemann)", named:true, niche:true,
+         reagents:"C₆H₅N₂⁺BF₄⁻, heat",
+         equation:"C₆H₅N₂⁺BF₄⁻ → C₆H₅F + N₂ + BF₃",
+         mechanism:"Pyrolysis of diazonium fluoroborate",
+         note:"Gives fluorobenzene, not phenol — but testable as a named reaction in the diazonium series.",
+         tip:""},
+      ]
+    }
+  ]
+},
+ethers: {
+  label: "Ethers",
+  groups: [
+    {
+      title: "From Alcohols",
+      rxns: [
+        {name:"Williamson ether synthesis", named:true, niche:false,
+         reagents:"R-ONa + R'-X (SN2 conditions)",
+         equation:"R-ONa + R'X → R-O-R' + NaX",
+         mechanism:"SN2: alkoxide attacks alkyl halide",
+         note:"Best method for asymmetric ethers. Use 1° alkyl halide to avoid elimination. R-ONa + tertiary R'X → mostly elimination.",
+         tip:"Most important ether synthesis. Know that R-O⁻ should be paired with unhindered RX."},
+        {name:"Acid-catalysed dehydration of alcohols (intermolecular)", named:false, niche:false,
+         reagents:"H₂SO₄, 140°C (for ethanol)",
+         equation:"2 ROH → R-O-R + H₂O",
+         mechanism:"One alcohol protonated; SN2 by second alcohol",
+         note:"Only for symmetrical ethers; 140°C gives ether, 170°C gives alkene.",
+         tip:"Temperature distinction is a classic NEET MCQ trap."},
+      ]
+    },
+    {
+      title: "Niche Methods",
+      rxns: [
+        {name:"From silver salt of carboxylate + alkyl halide (for esters; analog concept)", named:false, niche:true,
+         reagents:"Silver oxide (Ag₂O) + 2 RX",
+         equation:"2 RX + Ag₂O → R-O-R + 2 AgX",
+         mechanism:"SN2 displacement using silver to remove halide",
+         note:"Useful for simple symmetrical ethers in the lab.",
+         tip:""},
+        {name:"Vinyl ethers from acetylene", named:false, niche:true,
+         reagents:"Acetylene + ROH, KOH catalyst, 180°C",
+         equation:"HC≡CH + ROH → CH₂=CHOR",
+         mechanism:"Nucleophilic addition of alcohol to triple bond",
+         note:"Vinyl ethers have special chemical reactivity (acetal precursors).",
+         tip:""},
+      ]
+    }
+  ]
+},
+ald: {
+  label: "Aldehydes",
+  groups: [
+    {
+      title: "Oxidation of Alcohols",
+      rxns: [
+        {name:"Oxidation of primary alcohols", named:false, niche:false,
+         reagents:"PCC (pyridinium chlorochromate) or MnO₂ (allylic/benzylic)",
+         equation:"RCH₂OH → RCHO",
+         mechanism:"Chromium(VI) oxidation via chromate ester intermediate",
+         note:"PCC stops at aldehyde stage. K₂Cr₂O₇/H₂SO₄ over-oxidises to acid.",
+         tip:"PCC = aldehyde; K₂Cr₂O₇ = carboxylic acid (for 1° alcohols)."},
+        {name:"Swern oxidation", named:true, niche:true,
+         reagents:"DMSO, oxalyl chloride, then Et₃N, −78°C",
+         equation:"RCH₂OH → RCHO",
+         mechanism:"Activated DMSO forms sulfonium ylide intermediate; [1,2]-elimination",
+         note:"Mild method, prevents over-oxidation. Rarely asked directly but comes up in advanced NEET or AIIMS-level MCQs.",
+         tip:""},
+      ]
+    },
+    {
+      title: "Reduction of Acid Derivatives",
+      rxns: [
+        {name:"Rosenmund reduction", named:true, niche:false,
+         reagents:"Acid chloride + H₂, Pd/BaSO₄ (poisoned catalyst), toluene",
+         equation:"RCOCl + H₂ → RCHO + HCl",
+         mechanism:"Catalytic hydrogenation with deactivated Pd (BaSO₄ and quinoline prevent over-reduction)",
+         note:"Gives aldehyde from acid chloride. Catalyst is 'poisoned' to prevent reduction to alcohol.",
+         tip:"Key: BaSO₄ + quinoline = poisoned catalyst. Direct NEET question."},
+        {name:"Stephen reduction", named:true, niche:false,
+         reagents:"Nitrile + SnCl₂/HCl, then H₂O",
+         equation:"RCN → [RCH=NH₂]⁺ Cl⁻ → RCHO (after hydrolysis)",
+         mechanism:"Partial reduction of nitrile via imine salt (aldimine), hydrolysis gives aldehyde",
+         note:"Nitrile → aldehyde. Distinct from catalytic hydrogenation which gives amine.",
+         tip:"Stephen = SnCl₂. Don't confuse with Rosenmund (acid chloride)."},
+        {name:"DIBAL-H reduction of esters/nitriles", named:true, niche:true,
+         reagents:"DIBAL-H (diisobutylaluminium hydride), −78°C, then H₃O⁺",
+         equation:"RCOOR' (or RCN) → RCHO",
+         mechanism:"One hydride delivery to carbonyl; chelate-controlled partial reduction",
+         note:"DIBAL-H at low temperature stops at aldehyde. Room temperature → full reduction to alcohol.",
+         tip:"Temperature is the key control factor."},
+      ]
+    },
+    {
+      title: "From Hydrocarbons",
+      rxns: [
+        {name:"Ozonolysis of alkenes", named:false, niche:false,
+         reagents:"O₃, then Zn/H₂O (reductive workup)",
+         equation:"RCH=CHR' → RCHO + R'CHO",
+         mechanism:"[3+2] cycloaddition of ozone; carbonyl oxide intermediate; reductive workup gives aldehydes",
+         note:"Reductive workup (Zn/H₂O) gives aldehydes. Oxidative workup (H₂O₂) gives carboxylic acids.",
+         tip:"Reductive = aldehyde; Oxidative = acid. Classic MCQ distinction."},
+        {name:"Wacker oxidation", named:true, niche:true,
+         reagents:"Alkene + O₂, PdCl₂/CuCl₂ catalyst, H₂O",
+         equation:"CH₂=CH₂ + O₂ → CH₃CHO",
+         mechanism:"Palladium-catalysed oxidation; nucleophilic attack by water",
+         note:"Industrial synthesis of acetaldehyde from ethylene.",
+         tip:""},
+        {name:"Gattermann–Koch reaction", named:true, niche:false,
+         reagents:"CO + HCl + AlCl₃/CuCl, in benzene",
+         equation:"C₆H₆ + CO + HCl → C₆H₅CHO",
+         mechanism:"Formyl cation (HCO⁺) attacks ring via electrophilic aromatic substitution",
+         note:"Synthesis of benzaldehyde directly from benzene. Gattermann–Koch uses CO/HCl/AlCl₃.",
+         tip:"Don't confuse with Gattermann reaction (which uses HCN/HCl/AlCl₃ → same product but different reagents)."},
+        {name:"Gattermann reaction", named:true, niche:false,
+         reagents:"HCN + HCl + AlCl₃ (anhydrous), then H₂O",
+         equation:"ArH + HCN + HCl → ArCHO",
+         mechanism:"Nitrilium ion (H₂C=NH⁺) attacks ring; imine hydrolysis gives aldehyde",
+         note:"Works for activated arenes (phenol, aniline). Does NOT work for benzene itself (unlike Gattermann–Koch).",
+         tip:"Gattermann (HCN) works on activated rings. Gattermann–Koch (CO) works on benzene."},
+        {name:"Etard reaction", named:true, niche:false,
+         reagents:"CrO₂Cl₂ (chromyl chloride) in CS₂, then H₂O",
+         equation:"C₆H₅CH₃ → C₆H₅CHO",
+         mechanism:"Chromyl chloride complex with methyl group; hydrolysis gives aldehyde",
+         note:"Oxidation of toluene's methyl group to aldehyde using CrO₂Cl₂.",
+         tip:"Etard reaction: toluene → benzaldehyde directly."},
+        {name:"Side-chain oxidation of alkylbenzenes using MnO₂", named:false, niche:true,
+         reagents:"MnO₂ (benzylic CH₂ only)",
+         equation:"ArCH₂OH → ArCHO",
+         mechanism:"Selective oxidation at benzylic position",
+         note:"",
+         tip:""},
+      ]
+    },
+    {
+      title: "From Gem-dihalides (Acid Hydrolysis)",
+      rxns: [
+        {name:"Hydrolysis of gem-dihalides", named:false, niche:false,
+         reagents:"Aq. NaOH or Ca(OH)₂, heat",
+         equation:"RCHCl₂ + H₂O → RCHO + 2HCl",
+         mechanism:"Sequential SN2 hydrolyses; gem-diol tautomers to aldehyde",
+         note:"RCHCl₂ → aldehyde; RCCl₃ → carboxylic acid (trichloride).",
+         tip:""},
+      ]
+    }
+  ]
+},
+ket: {
+  label: "Ketones",
+  groups: [
+    {
+      title: "Oxidation of Secondary Alcohols",
+      rxns: [
+        {name:"Oxidation with K₂Cr₂O₇/H₂SO₄ or KMnO₄", named:false, niche:false,
+         reagents:"K₂Cr₂O₇/H₂SO₄ or acidic KMnO₄",
+         equation:"R₂CHOH → R₂C=O",
+         mechanism:"Chromate ester formation; β-elimination of H",
+         note:"Secondary alcohol → ketone (cannot be over-oxidised unlike primary). PCC also works.",
+         tip:""},
+        {name:"Oppenauer oxidation", named:true, niche:true,
+         reagents:"Al(OPr-i)₃ + acetone (hydrogen acceptor)",
+         equation:"R₂CHOH → R₂C=O",
+         mechanism:"Meerwein–Ponndorf–Verley type: hydride transfer to acetone",
+         note:"Reverse of MPV reduction. Selective for allylic/secondary alcohols.",
+         tip:""},
+      ]
+    },
+    {
+      title: "From Acid Chlorides & Nitriles",
+      rxns: [
+        {name:"Reaction of acid chlorides with organocadmium reagents", named:false, niche:false,
+         reagents:"R₂Cd (from RMgX + CdCl₂) + R'COCl",
+         equation:"RCOCl + R₂Cd → RCOR",
+         mechanism:"Organocadmium less reactive than Grignard; stops at ketone",
+         note:"Organocadmium reagents are less reactive than Grignard — can't reduce ketone further.",
+         tip:"Key contrast: Grignard with ketone → alcohol; Cd compound → stops at ketone."},
+        {name:"Reaction of nitriles with Grignard reagent (then hydrolysis)", named:false, niche:false,
+         reagents:"RCN + R'MgX, then H₃O⁺",
+         equation:"RCN + R'MgX → R-C(=NMgX)-R' → R-CO-R' (after hydrolysis)",
+         mechanism:"Addition to CN, then hydrolysis of imine salt",
+         note:"Versatile ketone synthesis; can use aromatic nitriles.",
+         tip:""},
+      ]
+    },
+    {
+      title: "From Hydrocarbons",
+      rxns: [
+        {name:"Ozonolysis of internal alkenes", named:false, niche:false,
+         reagents:"O₃, then Zn/H₂O",
+         equation:"R-CH=CR'₂ → RCHO + R'₂C=O",
+         mechanism:"[3+2] cycloaddition; reductive workup",
+         note:"Trisubstituted alkene cleavage gives one aldehyde + one ketone.",
+         tip:""},
+        {name:"Wacker process (propylene to acetone)", named:true, niche:true,
+         reagents:"Propene + O₂, PdCl₂/CuCl₂, H₂O",
+         equation:"CH₃CH=CH₂ → CH₃COCH₃",
+         mechanism:"Markovnikov hydration of propylene via Pd-catalysis",
+         note:"Industrial production of acetone (propanone).",
+         tip:""},
+        {name:"Dry distillation of calcium salts of carboxylates", named:false, niche:true,
+         reagents:"Calcium salt, heat (dry distillation)",
+         equation:"(RCOO)₂Ca → R₂CO + CaCO₃",
+         mechanism:"Pyrolysis: two acyl groups combine",
+         note:"(CH₃COO)₂Ca → acetone + CaCO₃. Rare but asked.",
+         tip:""},
+        {name:"Friedel–Crafts acylation", named:true, niche:false,
+         reagents:"R-COCl + AlCl₃ (anhydrous), benzene",
+         equation:"C₆H₆ + RCOCl → C₆H₅COR + HCl",
+         mechanism:"Acylium ion (RCO⁺) attacks benzene ring via EAS",
+         note:"Gives aryl ketones. No rearrangement (unlike Friedel–Crafts alkylation). Deactivated rings don't react.",
+         tip:"Acylium ion (RCO⁺) is stabilised by resonance — no rearrangement."},
+      ]
+    }
+  ]
+},
+carb: {
+  label: "Carboxylic Acids",
+  groups: [
+    {
+      title: "Oxidation Methods",
+      rxns: [
+        {name:"Oxidation of primary alcohols / aldehydes", named:false, niche:false,
+         reagents:"K₂Cr₂O₇/H₂SO₄, KMnO₄, or Tollens/Fehling (for RCHO)",
+         equation:"RCH₂OH or RCHO → RCOOH",
+         mechanism:"Oxidation of aldehyde intermediate",
+         note:"Aldehydes are easily oxidised even by mild agents (Tollens, Fehling). Alcohols need stronger conditions.",
+         tip:""},
+        {name:"Baeyer–Villiger oxidation → not acid but testable context", named:true, niche:true,
+         reagents:"mCPBA or H₂O₂/H⁺ with ketone",
+         equation:"R₂CO + peracid → ester (or lactone)",
+         mechanism:"Nucleophilic attack of peracid on carbonyl; [1,2]-shift (migratory aptitude: 3°>2°>1°>Me>H)",
+         note:"Converts ketone to ester; not acid directly but linked conceptually.",
+         tip:""},
+        {name:"Oxidation of alkylbenzenes (side chain)", named:false, niche:false,
+         reagents:"Hot alk. KMnO₄, then H⁺",
+         equation:"C₆H₅R (R = any alkyl) → C₆H₅COOH",
+         mechanism:"Radical/ionic oxidation of benzylic CH; progresses to carboxylate",
+         note:"ANY alkyl group on benzene → benzoic acid. Even tert-butyl with only α-H.",
+         tip:"Regardless of chain length: all give benzoic acid."},
+        {name:"Haloform reaction → iodoform", named:true, niche:false,
+         reagents:"I₂ + NaOH (or X₂/NaOH for Cl, Br)",
+         equation:"CH₃COR + 3I₂ + 3NaOH → CHI₃ + RCOONa",
+         mechanism:"Halogenation at α-carbon (3×), then OH⁻ attack on carbonyl; leaving group CHX₃",
+         note:"Methyl ketones (CH₃COR) give iodoform (CHI₃, yellow ppt). Also: CH₃CH(OH)R, CH₃CHO, and ethanol.",
+         tip:"Positive iodoform test substances: CH₃COR, CH₃CHO, CH₃CH₂OH, secondary methyl carbinols."},
+      ]
+    },
+    {
+      title: "From Nitriles & Acid Derivatives",
+      rxns: [
+        {name:"Hydrolysis of nitriles (cyanide hydrolysis)", named:false, niche:false,
+         reagents:"Dil. HCl or NaOH, H₂O, heat",
+         equation:"RCN + H₂O → RCONH₂ → RCOOH + NH₃",
+         mechanism:"Nucleophilic addition of water to C≡N, then further hydrolysis",
+         note:"Two-step: nitrile → amide → acid. Excellent method for chain extension by 1C.",
+         tip:""},
+        {name:"Kolbe's electrolytic method", named:true, niche:false,
+         reagents:"Electrolysis of sodium/potassium carboxylate solution",
+         equation:"2 RCOONa → R-R + 2CO₂ + 2NaOH (at anode: RCOO⁻ → R• + CO₂)",
+         mechanism:"Radical coupling of carboxylate radicals at anode",
+         note:"Gives higher alkane (coupling of two R• radicals). Formate → CO₂ (no coupling). Used to prepare symmetrical higher carboxylic acids from lower ones too.",
+         tip:""},
+        {name:"Koch reaction", named:true, niche:true,
+         reagents:"Alkene + CO + H₂O, H₂SO₄/BF₃",
+         equation:"Alkene + CO + H₂O → Branched carboxylic acid (Markovnikov)",
+         mechanism:"Carbocation from alkene + CO forms acylium ion; H₂O attacks",
+         note:"Produces branched acids. Rarely asked at NEET level but appears in advanced compilations.",
+         tip:""},
+        {name:"Arndt–Eistert synthesis (chain extension by 1C)", named:true, niche:true,
+         reagents:"Acid chloride + CH₂N₂ (diazomethane), then Ag₂O/H₂O (Wolff rearrangement)",
+         equation:"RCOCl → RCOCHN₂ → (Wolff rearrangement) → ketene → RCHCOOH",
+         mechanism:"Diazoketone intermediate; Wolff rearrangement to ketene; ketene + H₂O → acid",
+         note:"Extends carbon chain by one. Rare in NEET but mentioned in advanced chapters.",
+         tip:""},
+      ]
+    },
+    {
+      title: "Carbonation of Grignard & Related",
+      rxns: [
+        {name:"Grignard + CO₂ (carbonation)", named:true, niche:false,
+         reagents:"RMgX + dry CO₂ (or solid CO₂), then H₃O⁺",
+         equation:"RMgX + CO₂ → RCOOMgX → RCOOH",
+         mechanism:"Nucleophilic addition of R⁻ to CO₂",
+         note:"One of the best methods for preparing carboxylic acids with 1 extra carbon.",
+         tip:""},
+        {name:"Kolbe–Schmitt reaction", named:true, niche:false,
+         reagents:"Sodium phenoxide + CO₂, 125°C, 4–7 atm, then H⁺",
+         equation:"C₆H₅ONa + CO₂ → C₆H₄(OH)COONa → Salicylic acid",
+         mechanism:"Electrophilic carboxylation of phenoxide ring (ortho-selectivity with Na⁺ chelation)",
+         note:"Gives salicylic acid (ortho-hydroxybenzoic acid) selectively. With K⁺ → para product.",
+         tip:"Na salt → ortho (salicylic acid). K salt → para. Key NEET fact."},
+      ]
+    },
+    {
+      title: "From Gem-trihalides",
+      rxns: [
+        {name:"Hydrolysis of trichlorides", named:false, niche:true,
+         reagents:"RCCl₃ + NaOH (aq), heat, then H⁺",
+         equation:"RCCl₃ → RCCl₂(OH) → RCOCl → RCOOH",
+         mechanism:"Sequential hydrolysis of C-Cl bonds",
+         note:"RCCl₃ (from oxidation of RCH₃ with Cl₂/UV) → acid.",
+         tip:""},
+      ]
+    }
+  ]
+}
+};
+
+let currentTab = 'all';
+
+function showTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  const allTabs = document.querySelectorAll('.tab');
+  allTabs.forEach(t => { if(t.textContent.trim() === getTabLabel(tab)) t.classList.add('active'); });
+  document.getElementById('search').value = '';
+  renderAll(tab, '');
+}
+
+function getTabLabel(tab) {
+  const map = {all:'All',alcohols:'Alcohols',phenols:'Phenols',ethers:'Ethers',ald:'Aldehydes',ket:'Ketones',carb:'Carboxylic Acids'};
+  return map[tab] || tab;
+}
+
+const tabButtons = document.querySelectorAll('.tab');
+tabButtons[0].classList.add('active');
+
+function filterSearch() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  renderAll(currentTab, q);
+}
+
+function renderAll(tab, query) {
+  const container = document.getElementById('content');
+  let html = '';
+  const keys = tab === 'all' ? Object.keys(data) : [tab];
+  let totalShown = 0;
+  keys.forEach(key => {
+    const section = data[key];
+    let sectionHtml = '';
+    section.groups.forEach(group => {
+      let groupHtml = '';
+      group.rxns.forEach(rxn => {
+        const searchable = (rxn.name + rxn.reagents + rxn.equation + rxn.note + rxn.mechanism).toLowerCase();
+        if(query && !searchable.includes(query)) return;
+        totalShown++;
+        const id = 'rxn-' + Math.random().toString(36).slice(2);
+        groupHtml += `<div class="rxn" id="${id}" onclick="toggle('${id}')">
+          <div class="rxn-header">
+            <div>
+              <div class="rxn-name">${rxn.name}</div>
+              <div class="rxn-reagents">${rxn.reagents}</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+              ${rxn.named ? `<span class="named-badge">Named</span>` : ''}
+              ${rxn.niche ? `<span class="niche-badge">Niche</span>` : ''}
+              <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="rxn-detail" id="detail-${id}">
+            <div class="detail-row"><span class="detail-label">Reaction</span><div class="reaction-box">${rxn.equation}</div></div>
+            <div class="detail-row"><span class="detail-label">Mechanism</span><span class="detail-val">${rxn.mechanism}</span></div>
+            ${rxn.note ? `<div class="detail-row"><span class="detail-label">Key point</span><span class="detail-val">${rxn.note}</span></div>` : ''}
+            ${rxn.tip ? `<div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> NEET tip: ${rxn.tip}</div>` : ''}
+          </div>
+        </div>`;
+      });
+      if(groupHtml) {
+        sectionHtml += `<div class="group"><div class="group-title">${tab==='all' ? section.label+' — '+group.title : group.title}</div>${groupHtml}</div>`;
+      }
+    });
+    if(sectionHtml) html += sectionHtml;
+  });
+  if(!html) html = `<div class="no-results">No reactions found for "<strong>${query}</strong>"</div>`;
+  container.innerHTML = html;
+}
+
+function toggle(id) {
+  const rxn = document.getElementById(id);
+  const detail = document.getElementById('detail-'+id);
+  rxn.classList.toggle('open');
+  detail.classList.toggle('open');
+}
+
+renderAll('all','');
+
+// Fix tab active state
+document.querySelectorAll('.tab').forEach((t,i) => {
+  t.onclick = function() {
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const tabs = ['all','alcohols','phenols','ethers','ald','ket','carb'];
+    currentTab = tabs[i];
+    document.getElementById('search').value = '';
+    renderAll(currentTab,'');
+  }
+});
+</script>
+</body></html>
