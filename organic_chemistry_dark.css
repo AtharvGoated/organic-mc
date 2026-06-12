@@ -138,6 +138,48 @@ body {
 }
 
 /* ── Search bar ──────────────────────────────────────────── */
+.section-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  width: min(900px, 100%);
+  margin: 0 auto 1.25rem;
+}
+
+.section-tab {
+  min-height: 72px;
+  padding: 14px 20px;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--r-lg);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-family: var(--font-title);
+  font-size: clamp(15px, 2vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background var(--ease), color var(--ease), border-color var(--ease), box-shadow var(--ease), transform var(--ease);
+}
+
+.section-tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-raised);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.section-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.section-tab.active {
+  color: var(--accent);
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-mid) inset, 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
 .search-bar {
   width: 100%;
   padding: 10px 14px;
@@ -339,6 +381,19 @@ body {
   border-color: var(--badge-niche-border);
 }
 
+.section-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+  border: 1px solid var(--border-mid);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
 /* ── Chevron ─────────────────────────────────────────────── */
 .chevron {
   font-size: 18px;
@@ -471,9 +526,23 @@ body {
 }
 
 /* ── Responsive ──────────────────────────────────────────── */
-@media (max-width: 50%) {
+@media (max-width: 700px) {
   body {
     padding: 1rem 1rem 4rem;
+  }
+
+  .page-header {
+    font-size: 28px;
+  }
+
+  .section-tabs {
+    gap: 7px;
+  }
+
+  .section-tab {
+    min-height: 58px;
+    padding: 10px 7px;
+    font-size: 13px;
   }
 
   .detail-row {

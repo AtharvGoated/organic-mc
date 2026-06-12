@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,12 @@
 </head>
 <body>
   <div class="page-header">Organic Chem Preparations lol</div>
-<h2 class="sr-only">Interactive organic chemistry preparation methods for NEET — alcohols, phenols, ethers, aldehydes, ketones, and carboxylic acids with named reactions highlighted</h2>
+<h2 class="sr-only">Interactive organic chemistry preparation methods for NEET/JEE — alcohols, phenols, ethers, aldehydes, ketones, carboxylic acids, and amines with named reactions highlighted</h2>
+<div class="section-tabs" id="section-tabs" role="tablist" aria-label="Organic chemistry sections">
+<button class="section-tab active" type="button" data-section="preparations" role="tab" aria-selected="true">Preparations</button>
+<button class="section-tab" type="button" data-section="properties" role="tab" aria-selected="false">Chemical Properties</button>
+<button class="section-tab" type="button" data-section="tests" role="tab" aria-selected="false">Tests</button>
+</div>
 <div class="tabs" id="tabs">
 <button class="tab active" onclick="showTab('all')">All</button>
 <button class="tab" onclick="showTab('alcohols')">Alcohols</button>
@@ -20,8 +24,9 @@
 <button class="tab" onclick="showTab('ald')">Aldehydes</button>
 <button class="tab" onclick="showTab('ket')">Ketones</button>
 <button class="tab" onclick="showTab('carb')">Carboxylic Acids</button>
+<button class="tab" onclick="showTab('amines')">Amines</button>
 </div>
-<input class="search-bar" id="search" placeholder="Search reactions, reagents, or named reactions..." oninput="filterSearch()" />
+<input class="search-bar" id="search" placeholder="Search all preparations, properties, tests, reagents, or named reactions..." oninput="filterSearch()" />
 <div id="content"></div>
 <script>
 const data = {
@@ -62,7 +67,7 @@ alcohols: {
          tip:"LiAlH₄ is a stronger, less selective reducer than NaBH₄."},
         {name:"Grignard reaction", named:true, niche:false,
          reagents:"RMgX (Grignard reagent), then H₃O⁺",
-         equation:"HCHO + RMgX → RCH₂OH | RCHO + R'MgX → R'R CHOH | Ketone + RMgX → Tertiary alcohol",
+         equation:"HCHO + RMgX → RCH₂OH | RCHO + R'MgX → R'RCHOH | Ketone + RMgX → Tertiary alcohol",
          mechanism:"Nucleophilic addition of carbanion to carbonyl",
          note:"HCHO→1°, RCHO→2°, Ketone→3° alcohol. React with CO₂ → Carboxylic acid.",
          tip:"Extremely important for synthesis problems in NEET."},
@@ -449,7 +454,590 @@ carb: {
       ]
     }
   ]
+},
+amines: {
+  label: "Amines",
+  groups: [
+    {
+      title: "Reduction Methods",
+      rxns: [
+        {name:"Reduction of nitro compounds", named:false, niche:false,
+         reagents:"Fe/HCl or Sn/HCl (Béchamp reduction); or H₂/Pd, or LiAlH₄",
+         equation:"ArNO₂ + 6[H] → ArNH₂ + 2H₂O | RNO₂ + 6[H] → RNH₂ + 2H₂O",
+         mechanism:"Sequential reduction: NO₂ → NO → NHOH → NH₂ (via nitroso and hydroxylamine intermediates)",
+         note:"Most important industrial route to aniline. Fe/HCl is the classic lab reagent. H₂/Ni works for aliphatic nitro compounds.",
+         tip:"Aniline is made industrially by reduction of nitrobenzene — this is the single most important amine preparation for NEET."},
+        {name:"Reduction of nitriles with LiAlH₄ (or H₂/Ni)", named:false, niche:false,
+         reagents:"LiAlH₄, ether, then H₃O⁺; or H₂/Ni, pressure",
+         equation:"RCN + 4[H] → RCH₂NH₂ (primary amine, one extra C)",
+         mechanism:"Hydride delivery to C≡N twice; imine intermediate reduced to amine",
+         note:"Chain is extended by one carbon. RCN → RCH₂NH₂. Important for synthesis of 1° amines one carbon longer than the starting acid.",
+         tip:"Nitrile reduction always gives a PRIMARY amine with one more carbon than the nitrile. Classic chain-extension trick."},
+        {name:"Reduction of amides with LiAlH₄", named:false, niche:false,
+         reagents:"LiAlH₄, dry ether, then H₃O⁺",
+         equation:"RCONH₂ → RCH₂NH₂ (1°) | RCONHR' → RCH₂NHR' (2°) | RCONR'₂ → RCH₂NR'₂ (3°)",
+         mechanism:"Hydride attacks carbonyl C; C=O reduced to C–N",
+         note:"Degree of amine product mirrors the degree of the amide. LiAlH₄ cannot be replaced by NaBH₄ for amide reduction.",
+         tip:""},
+        {name:"Reduction of imines (Schiff bases) — Leuckart–Wallach", named:true, niche:true,
+         reagents:"H₂/Ni or NaBH₃CN (reductive amination), or HCOOH/heat (Leuckart)",
+         equation:"R₂C=NR' + 2[H] → R₂CHNHR'",
+         mechanism:"Hydride or H₂ adds across C=N bond",
+         note:"Reductive amination via imine: aldehyde/ketone + amine → imine → amine. Leuckart uses HCOOH as reductant.",
+         tip:"Reductive amination is the most versatile amine synthesis. Know that RCHO + R'NH₂ → R'NHCH₂R."},
+        {name:"Reduction of oximes", named:false, niche:true,
+         reagents:"Na/C₂H₅OH, or LiAlH₄, or H₂/Ni",
+         equation:"RCH=NOH + 4[H] → RCH₂NH₂",
+         mechanism:"Reduction of C=N-OH to C-N; hydroxylamine intermediate",
+         note:"Oximes (from aldehyde/ketone + NH₂OH) → 1° amine on reduction. Beckmann rearrangement (H₂SO₄) gives amide instead.",
+         tip:""},
+      ]
+    },
+    {
+      title: "Substitution & Ammonolysis",
+      rxns: [
+        {name:"Ammonolysis of alkyl halides (Hofmann's method)", named:true, niche:false,
+         reagents:"R-X + excess NH₃ (alc.), heat, sealed tube",
+         equation:"RX + NH₃ → RNH₂ + HX | RNH₂ + RX → R₂NH | R₂NH + RX → R₃N | R₃N + RX → R₄N⁺X⁻",
+         mechanism:"SN2: NH₃ (or amine) acts as nucleophile; successive N-alkylation",
+         note:"Gives a mixture of 1°, 2°, 3° amines and quaternary salt. Use excess NH₃ to favour 1° amine. Not selective — this is the key limitation.",
+         tip:"Excess NH₃ → 1° amine predominantly. Excess RX → 3° amine/quaternary salt."},
+        {name:"Gabriel phthalimide synthesis", named:true, niche:false,
+         reagents:"Phthalimide + KOH → potassium phthalimide; + R-X; then N₂H₄ or KOH/H₂O, Δ",
+         equation:"Phthalimide-K⁺ + RX → N-alkylphthalimide → RNH₂ + phthalic acid (or phthalhydrazide)",
+         mechanism:"SN2 alkylation of N of phthalimide; hydrolysis liberates 1° amine",
+         note:"Gives ONLY pure primary amines — no secondary/tertiary contamination. Aryl halides do NOT react (no SN2 on ArX). Key NEET point: Gabriel synthesis cannot be used to make ArNH₂.",
+         tip:"Gabriel = pure 1° amine ONLY. Cannot make 2° or 3° amines or aryl amines."},
+        {name:"Ammonolysis of alcohols (catalytic)", named:false, niche:true,
+         reagents:"ROH + NH₃, Al₂O₃ or ThO₂ catalyst, 300–400°C",
+         equation:"ROH + NH₃ → RNH₂ + H₂O (mixture of 1°, 2°, 3°)",
+         mechanism:"Dehydration of alcohol; addition of NH₃ across C–O",
+         note:"Industrial method. Mixture obtained; conditions tuned to favour one product.",
+         tip:""},
+      ]
+    },
+    {
+      title: "Rearrangement Reactions (Named)",
+      rxns: [
+        {name:"Hofmann bromamide degradation (Hofmann rearrangement)", named:true, niche:false,
+         reagents:"Primary amide + Br₂ + NaOH (aq)",
+         equation:"RCONH₂ + Br₂ + 4NaOH → RNH₂ + Na₂CO₃ + 2NaBr + 2H₂O",
+         mechanism:"N-bromo amide → isocyanate (via nitrene or N-Br migration); isocyanate + H₂O → amine + CO₂",
+         note:"Product amine has ONE FEWER carbon than the starting amide. RCONH₂ (n carbons) → RNH₂ (n−1 carbons). Very testable.",
+         tip:"Hofmann degradation: amide loses one carbon → amine. Net: RCONH₂ → RNH₂. Classic NEET question."},
+        {name:"Curtius rearrangement", named:true, niche:true,
+         reagents:"Acyl azide (RCON₃), heat",
+         equation:"RCON₃ → R-N=C=O (isocyanate) + N₂ → RNH₂ (after hydrolysis)",
+         mechanism:"Thermal loss of N₂; 1,2-shift of R to electron-deficient N gives isocyanate",
+         note:"Like Hofmann but from acyl azide. Retains stereochemistry (concerted migration). 1 fewer carbon than acid.",
+         tip:""},
+        {name:"Lossen rearrangement", named:true, niche:true,
+         reagents:"O-acyl hydroxamic acid, base",
+         equation:"RC(=O)NHOH → isocyanate (R-N=C=O) → RNH₂",
+         mechanism:"Base activates O-acyl; N-to-C migration analogous to Hofmann",
+         note:"Mechanistically similar to Hofmann and Curtius. Rare at NEET level but featured in JEE Advanced.",
+         tip:""},
+        {name:"Beckmann rearrangement", named:true, niche:true,
+         reagents:"Oxime + H₂SO₄ (conc.) or PCl₅ or P₂O₅",
+         equation:"R-C(=NOH)-R' → RCONHR' (amide, not amine)",
+         mechanism:"Protonation of OH; anti-periplanar R migrates to N; water attacks → amide",
+         note:"Converts oxime → amide (not amine). The anti group to OH migrates. Industrial use: cyclohexanone oxime → caprolactam (nylon-6).",
+         tip:"Beckmann → amide (not amine). The group ANTI to OH migrates. Nylon-6 connection is frequently asked."},
+      ]
+    },
+    {
+      title: "From Carbonyl Compounds",
+      rxns: [
+        {name:"Reductive amination (general)", named:false, niche:false,
+         reagents:"Aldehyde or ketone + amine (NH₃, RNH₂, or R₂NH) + reducing agent (H₂/Ni or NaBH₃CN)",
+         equation:"RCHO + R'NH₂ → [RCH=NR'] → RCH₂NHR' (2° amine)",
+         mechanism:"Imine (Schiff base) formation; reduction of imine C=N to C–N",
+         note:"RCHO + NH₃ + [H] → RCH₂NH₂ (1°). RCHO + RNH₂ + [H] → R₂CHNH (2°). Most versatile.",
+         tip:"Reductive amination is the go-to synthesis for any target amine in JEE problems."},
+        {name:"Strecker synthesis of amino acids", named:true, niche:true,
+         reagents:"RCHO + NH₃ + HCN, then H₂O/H⁺",
+         equation:"RCHO + NH₃ + HCN → RCH(NH₂)CN → RCH(NH₂)COOH (α-amino acid)",
+         mechanism:"Condensation to give α-aminonitrile; hydrolysis of CN to COOH",
+         note:"Gives α-amino acids directly. Classic in biochemistry context of NEET/JEE.",
+         tip:""},
+      ]
+    },
+    {
+      title: "Aromatic Amines — Specific Methods",
+      rxns: [
+        {name:"Reduction of nitrobenzene to aniline", named:false, niche:false,
+         reagents:"Fe + HCl (Béchamp) or H₂/Pd; or Sn/conc. HCl",
+         equation:"C₆H₅NO₂ + 6[H] → C₆H₅NH₂ + 2H₂O",
+         mechanism:"Sequential proton-coupled electron transfers; nitroso and phenylhydroxylamine intermediates",
+         note:"Industrial: H₂/Cu or H₂/Ni at 200°C, 20 atm. Lab: Fe/HCl. Aniline is the most important aromatic amine.",
+         tip:"NEET: Fe/HCl or Sn/HCl + HCl → aniline. Do NOT confuse reductant with the acid (HCl provides H⁺, Fe/Sn provides electrons)."},
+        {name:"Partial reduction of nitrobenzene — Zinin reduction", named:true, niche:true,
+         reagents:"ArNO₂ + Na₂S (or (NH₄)₂S), aqueous",
+         equation:"2 C₆H₅NO₂ + 3 Na₂S + H₂O → 2 C₆H₅NH₂ + 3 S + 6 NaOH",
+         mechanism:"Sulfide acts as mild two-electron reductant; selectively reduces one NO₂ in dinitro compounds",
+         note:"Useful for selective reduction when two NO₂ groups are present. Reduces only one.",
+         tip:"Zinin reduction = selective reduction with Na₂S. Named reaction for JEE Advanced."},
+        {name:"Ammonolysis via diazonium salt intermediate", named:false, niche:true,
+         reagents:"ArN₂⁺Cl⁻ + CuCN (Sandmeyer) → ArCN → ArNH₂ (after LiAlH₄ or H₂)",
+         equation:"C₆H₅N₂⁺Cl⁻ + CuCN → C₆H₅CN → C₆H₅CH₂NH₂",
+         mechanism:"Sandmeyer: Cu(I) radical mechanism; then nitrile reduction",
+         note:"Indirect route: arenediazonium → ArCN → ArCH₂NH₂ (benzylamine type).",
+         tip:""},
+        {name:"Buchwald–Hartwig amination", named:true, niche:true,
+         reagents:"ArX + HNR₂ + Pd catalyst (Pd₂(dba)₃ or Pd(OAc)₂) + ligand + base",
+         equation:"ArX + HNR₂ → Ar-NR₂ + HX",
+         mechanism:"Oxidative addition of ArX to Pd(0); coordination of amine; reductive elimination",
+         note:"Modern Pd-catalysed C–N coupling. Not directly in NEET/JEE syllabus but appears in advanced JEE problems as a modern named reaction.",
+         tip:""},
+      ]
+    },
+    {
+      title: "Diazonium Chemistry → Amine Connections",
+      rxns: [
+        {name:"Diazotisation of primary aromatic amines", named:false, niche:false,
+         reagents:"ArNH₂ + NaNO₂ + HCl, 0–5°C",
+         equation:"C₆H₅NH₂ + NaNO₂ + HCl → C₆H₅N₂⁺Cl⁻ + NaCl + H₂O",
+         mechanism:"Nitrosonium ion (NO⁺) attacks amine nitrogen; loss of H₂O gives diazonium",
+         note:"Temperature critical: 0–5°C. Above 5°C → phenol. Diazonium is key intermediate connecting amines to halogens, phenols, nitriles, etc.",
+         tip:"Diazotisation: keep temp at 0–5°C. Warm → phenol. This is the entry point to Sandmeyer reactions."},
+        {name:"Sandmeyer reaction (diazonium → ArX or ArCN)", named:true, niche:false,
+         reagents:"ArN₂⁺Cl⁻ + CuCl → ArCl; + CuBr → ArBr; + CuCN → ArCN",
+         equation:"C₆H₅N₂⁺Cl⁻ + CuCl → C₆H₅Cl + N₂ | + CuBr → C₆H₅Br + N₂ | + CuCN → C₆H₅CN + N₂",
+         mechanism:"Cu(I)-catalysed radical mechanism; Cu(I) is reoxidised back",
+         note:"Sandmeyer: requires Cu(I) halide as catalyst. Gattermann modification uses Cu powder instead.",
+         tip:"Sandmeyer = CuX catalyst (Cu(I)). Gattermann modification = Cu powder. Both give ArX from diazonium."},
+        {name:"Balz–Schiemann reaction (ArF from diazonium)", named:true, niche:false,
+         reagents:"ArN₂⁺Cl⁻ + HBF₄ → ArN₂⁺BF₄⁻, then heat",
+         equation:"C₆H₅N₂⁺BF₄⁻ → C₆H₅F + N₂ + BF₃",
+         mechanism:"Pyrolysis of diazonium tetrafluoroborate; heterolysis",
+         note:"Only practical route to ArF. Cannot use Sandmeyer with F⁻ (CuF is insoluble/ineffective).",
+         tip:"ArF via Balz–Schiemann only. No direct Sandmeyer route for fluorine."},
+        {name:"Coupling reaction — azo dye formation", named:true, niche:false,
+         reagents:"ArN₂⁺Cl⁻ + activated arene (phenol or aniline), alkaline/neutral pH",
+         equation:"C₆H₅N₂⁺Cl⁻ + C₆H₅OH (in NaOH) → C₆H₅-N=N-C₆H₄OH (para-hydroxyazobenzene) + HCl",
+         mechanism:"Electrophilic aromatic substitution: diazonium (electrophile) attacks electron-rich ring at para position",
+         note:"Coupling occurs at para > ortho. Phenols couple in alkaline medium; anilines in mild acid/neutral. Produces brightly coloured azo compounds used as dyes.",
+         tip:"Diazonium + phenol (alkaline) → azo dye. Diazonium + aniline (neutral/acid) → azo dye. Product is ORANGE/RED coloured. Very frequently asked."},
+      ]
+    },
+    {
+      title: "Miscellaneous & Niche Methods",
+      rxns: [
+        {name:"Schmidt reaction (from carboxylic acids)", named:true, niche:true,
+         reagents:"RCOOH + HN₃ (hydrazoic acid) + H₂SO₄",
+         equation:"RCOOH + HN₃ → RNH₂ + CO₂ + N₂",
+         mechanism:"Protonation of acid; attack of HN₃; 1,2-shift (like Curtius); loss of N₂ and CO₂",
+         note:"Like Hofmann/Curtius but from carboxylic acid directly. Gives 1° amine with one fewer carbon. Rarely asked at NEET; appears in JEE Advanced.",
+         tip:""},
+        {name:"Eschweiler–Clarke reaction (N-methylation)", named:true, niche:true,
+         reagents:"Secondary amine + HCHO + HCOOH, heat",
+         equation:"R₂NH + HCHO + HCOOH → R₂NCH₃ + CO₂ + H₂O",
+         mechanism:"Iminium ion from R₂NH + HCHO; HCOOH acts as hydride donor (transfer hydrogenation)",
+         note:"Converts secondary amine to tertiary N-methyl amine. No over-alkylation. Cannot be used for 3° amine (already tertiary). Classic JEE named reaction.",
+         tip:"Eschweiler–Clarke: adds ONE methyl group specifically. HCOOH is the reductant."},
+        {name:"Menshutkin reaction (quaternary ammonium salt)", named:true, niche:true,
+         reagents:"Tertiary amine + alkyl halide (R₃N + RX)",
+         equation:"R₃N + R'X → R₃N⁺R'  X⁻ (quaternary ammonium halide)",
+         mechanism:"SN2: N lone pair attacks alkyl halide; no proton is lost (permanent positive charge on N)",
+         note:"Gives quaternary ammonium salts — these are NOT amines (no lone pair on N). Important distinction.",
+         tip:""},
+        {name:"Carbylamine reaction (isocyanide test for 1° amines)", named:true, niche:false,
+         reagents:"Primary amine + CHCl₃ + KOH (alc.), heat",
+         equation:"RNH₂ + CHCl₃ + 3KOH → R-N≡C (isocyanide) + 3KCl + 3H₂O",
+         mechanism:"α-elimination of CHCl₃ gives CCl₂ (dichlorocarbene); reacts with RNH₂ → isocyanide",
+         note:"Product (isocyanide, R–NC) has a characteristic horrible smell. ONLY primary amines give this test. 2° and 3° amines give NO reaction.",
+         tip:"Carbylamine test = positive for 1° amines ONLY. Reagents: CHCl₃ + alc. KOH. Product smells terrible."},
+        {name:"Hinsberg test (distinguishing 1°, 2°, 3° amines)", named:true, niche:false,
+         reagents:"Benzenesulfonyl chloride (C₆H₅SO₂Cl) + NaOH(aq)",
+         equation:"RNH₂ + C₆H₅SO₂Cl → RNH-SO₂C₆H₅ (ppt, soluble in NaOH) | R₂NH → R₂N-SO₂C₆H₅ (ppt, insoluble in NaOH) | R₃N → no reaction",
+         mechanism:"Nucleophilic acyl substitution at S of sulfonyl chloride; 2° sulfonamide has no N-H (non-acidic)",
+         note:"1°: sulfonamide dissolves in NaOH (N-H acidic). 2°: sulfonamide precipitates, insoluble in NaOH. 3°: no reaction at all.",
+         tip:"Hinsberg test summary: 1° → soluble ppt in NaOH; 2° → insoluble ppt; 3° → no ppt. A direct NEET MCQ answer."},
+      ]
+    }
+  ]
 }
+};
+
+const card = (name, reagents, equation, mechanism, note, tip = "", options = {}) => ({
+  name,
+  reagents,
+  equation,
+  mechanism,
+  note,
+  tip,
+  named: Boolean(options.named),
+  niche: Boolean(options.niche),
+  categoryTags: options.tags || []
+});
+
+const propertyData = {
+  alcohols: {
+    label: "Alcohols",
+    groups: [
+      {
+        title: "O-H Bond Reactions",
+        rxns: [
+          card("Reaction with active metals", "Na, K or Al metal", "2ROH + 2Na -> 2RONa + H2", "Acid-base reaction; the O-H proton is replaced by metal", "Alcohols form alkoxides and liberate hydrogen. Reactivity: H2O > ROH; lower alcohols react readily.", "Hydrogen evolution shows an acidic O-H bond, but this is not a selective alcohol test."),
+          card("Reaction with Grignard reagents", "RMgX in dry ether", "ROH + R'MgX -> RH + R'OMgX", "Strong acid-base reaction", "Any compound with an active hydrogen destroys a Grignard reagent, so all apparatus and solvents must be dry.", "One mole of alcohol consumes one mole of Grignard reagent."),
+          card("Fischer esterification", "R'COOH, conc. H2SO4, heat", "ROH + R'COOH <=> R'COOR + H2O", "Acid-catalysed nucleophilic acyl substitution", "The equilibrium is driven forward by using excess reactant or removing water.", "Alcohol + carboxylic acid gives a fruity-smelling ester.", {named:true}),
+          card("Acylation with acid chlorides or anhydrides", "RCOCl/pyridine or (RCO)2O", "ROH + RCOCl -> RCOOR + HCl", "Nucleophilic acyl substitution", "Acid chlorides react rapidly; pyridine removes HCl. Acetylation introduces CH3CO-.", "Phenols undergo the same O-acylation.")
+        ]
+      },
+      {
+        title: "C-O Bond Reactions",
+        rxns: [
+          card("Conversion to alkyl halides with hydrogen halides", "HCl/ZnCl2, HBr or HI", "ROH + HX -> RX + H2O", "SN1 is favoured for tertiary alcohols; SN2 for primary alcohols", "Reactivity with HX: 3 degree > 2 degree > 1 degree. HCl generally needs anhydrous ZnCl2.", "The rate difference is the basis of the Lucas test."),
+          card("Conversion with phosphorus and thionyl halides", "PCl5, PCl3, PBr3 or SOCl2", "ROH + SOCl2 -> RCl + SO2 + HCl", "Substitution at carbon after activation of the hydroxyl group", "SOCl2 is preferred because gaseous by-products escape, leaving a purer alkyl chloride.", "SOCl2 is the cleanest NCERT reagent for ROH -> RCl."),
+          card("Acid-catalysed dehydration to alkenes", "Conc. H2SO4, 443 K; or Al2O3, 623 K", "R-CH2-CH(OH)-R' -> alkene + H2O", "E1 for most 2 degree/3 degree alcohols; E2-like for many 1 degree alcohols", "Ease of dehydration: 3 degree > 2 degree > 1 degree. The more substituted alkene is usually major.", "At about 413 K ethanol gives ether; at about 443 K it gives ethene."),
+          card("Intermolecular dehydration to ethers", "Conc. H2SO4, about 413 K", "2ROH -> ROR + H2O", "Protonation followed by SN2 attack by a second alcohol", "Most useful for symmetrical ethers from primary alcohols; secondary and tertiary alcohols favour alkenes.", "Temperature decides ether versus alkene.")
+        ]
+      },
+      {
+        title: "Oxidation and Dehydrogenation",
+        rxns: [
+          card("Oxidation of primary, secondary and tertiary alcohols", "Acidified K2Cr2O7, KMnO4 or PCC", "1 degree ROH -> RCHO -> RCOOH | 2 degree ROH -> ketone | 3 degree ROH -> resistant", "Removal of hydrogen through a chromate ester or related oxidation pathway", "PCC can stop a primary alcohol at aldehyde; strong aqueous oxidants usually continue to acid.", "Remember the product map: primary aldehyde/acid, secondary ketone, tertiary no mild oxidation."),
+          card("Catalytic dehydrogenation over copper", "Cu, 573 K", "1 degree ROH -> aldehyde + H2 | 2 degree ROH -> ketone + H2 | 3 degree ROH -> alkene + H2O", "Surface dehydrogenation for primary/secondary alcohols; dehydration for tertiary alcohols", "A classic reagent-based distinction among alcohol classes.", "Copper at 573 K is a compact conversion map for all three classes.")
+        ]
+      }
+    ]
+  },
+  phenols: {
+    label: "Phenols",
+    groups: [
+      {
+        title: "Acidity and O-H Reactions",
+        rxns: [
+          card("Formation of phenoxides", "Na metal or aqueous NaOH", "2ArOH + 2Na -> 2ArONa + H2 | ArOH + NaOH -> ArONa + H2O", "Acid-base reaction; phenoxide is resonance stabilised", "Phenol is more acidic than alcohols and reacts with NaOH, unlike ordinary alcohols.", "Electron-withdrawing groups increase phenol acidity; electron-donating groups decrease it."),
+          card("No reaction with sodium bicarbonate", "Aqueous NaHCO3", "ArOH + NaHCO3 -> no CO2", "Phenol is weaker than carbonic acid", "This distinguishes phenols from carboxylic acids, which release CO2 with bicarbonate.", "Phenol: NaOH positive, NaHCO3 negative."),
+          card("Ester formation and acetylation", "RCOCl/pyridine or acid anhydride", "ArOH + CH3COCl -> ArOCOCH3 + HCl", "Nucleophilic acyl substitution at the acyl carbon", "Phenols form esters readily with acid chlorides/anhydrides but are less readily esterified by carboxylic acids than alcohols.", "Acetylation masks the phenolic O-H group.")
+        ]
+      },
+      {
+        title: "Electrophilic Substitution",
+        rxns: [
+          card("Bromination of phenol", "Br2 in CS2 at low temperature; or bromine water", "Phenol + 3Br2(aq) -> 2,4,6-tribromophenol + 3HBr", "The -OH group strongly activates the ring and directs ortho/para", "Non-polar solvent gives mainly mono-bromination; bromine water gives a white precipitate of 2,4,6-tribromophenol.", "Bromine water is both a reaction and a common phenol test."),
+          card("Nitration of phenol", "Dilute HNO3; or conc. HNO3/H2SO4", "Phenol -> o- and p-nitrophenol | strong nitration -> 2,4,6-trinitrophenol", "Electrophilic aromatic substitution", "Dilute acid gives ortho/para mono-nitro products; concentrated nitric acid gives picric acid.", "Picric acid is 2,4,6-trinitrophenol."),
+          card("Temperature-controlled sulphonation", "Conc. H2SO4, 293 K or 373 K", "Phenol -> o-hydroxybenzenesulphonic acid (293 K) | p-isomer (373 K)", "Reversible electrophilic aromatic substitution", "The ortho product is kinetically favoured at lower temperature; para product is favoured at higher temperature.", "Low temperature ortho, high temperature para.")
+        ]
+      },
+      {
+        title: "Named Carbon-Carbon Bond Reactions",
+        rxns: [
+          card("Kolbe-Schmitt reaction", "Sodium phenoxide, CO2, 400 K, 4-7 atm; then H+", "C6H5ONa + CO2 -> o-HOC6H4COONa -> salicylic acid", "Electrophilic carboxylation of the activated phenoxide ring", "The major product is salicylic acid after acidification.", "Do not confuse Kolbe-Schmitt carboxylation with Kolbe electrolysis.", {named:true}),
+          card("Reimer-Tiemann reaction", "CHCl3, aqueous NaOH, heat; then H+", "Phenol -> o-hydroxybenzaldehyde (major)", "Dichlorocarbene electrophile attacks the activated ring, followed by hydrolysis", "Introduces -CHO mainly at the ortho position; para product is minor.", "CHCl3/NaOH on phenol means salicylaldehyde.", {named:true}),
+          card("Azo coupling with diazonium salts", "ArN2+Cl-, alkaline medium, 273-278 K", "Phenoxide + ArN2+ -> p-hydroxyazobenzene", "Electrophilic aromatic substitution by the diazonium ion", "Coupling occurs mainly para to -OH and gives an intensely coloured azo dye.", "Phenol couples in alkaline medium.", {named:true, tags:["Phenols","Amines"]})
+        ]
+      },
+      {
+        title: "Reduction and Oxidation",
+        rxns: [
+          card("Reduction with zinc dust", "Zn dust, heat", "C6H5OH + Zn -> C6H6 + ZnO", "Deoxygenation of the phenolic group", "Phenol is reduced to benzene.", "A standard conversion: phenol -> benzene."),
+          card("Oxidation to quinones", "Na2Cr2O7/H2SO4 or other strong oxidant", "Phenol -> p-benzoquinone", "Oxidative dearomatisation to a conjugated diketone", "Phenol commonly gives para-benzoquinone under strong oxidation.", "", {niche:true})
+        ]
+      }
+    ]
+  },
+  ethers: {
+    label: "Ethers",
+    groups: [
+      {
+        title: "Cleavage Reactions",
+        rxns: [
+          card("Cleavage with hydrogen iodide or bromide", "Excess conc. HI or HBr, heat", "ROR' + HI -> RI + R'OH; excess HI -> RI + R'I", "Protonation of oxygen followed by SN2 or SN1 cleavage", "HI is most effective. With excess hot HI, both C-O bonds of dialkyl ethers can be converted to iodides.", "HCl is generally too weak for efficient ether cleavage."),
+          card("Regioselective cleavage of mixed dialkyl ethers", "One equivalent HI", "R-O-R' + HI -> smaller primary RI + larger alcohol", "I- attacks the less hindered carbon by SN2 unless a tertiary group permits SN1", "For methyl/primary versus larger groups, cleavage usually occurs at the methyl/primary side.", "Tertiary alkyl ethers give the tertiary iodide by SN1."),
+          card("Cleavage of aryl-alkyl ethers", "HI, heat", "Ar-O-R + HI -> ArOH + RI", "SN2 attack occurs at the alkyl carbon; the aryl C-O bond is not cleaved by SN2", "Anisole gives phenol and methyl iodide, not iodobenzene and methanol.", "Always break the alkyl-O bond in aryl-alkyl ethers.")
+        ]
+      },
+      {
+        title: "Aromatic Ethers - Ring Substitution",
+        rxns: [
+          card("Bromination of anisole", "Br2 in ethanoic acid", "Anisole -> p-bromoanisole (major) + o-bromoanisole", "Electrophilic aromatic substitution; -OCH3 is strongly ortho/para directing", "Bromination occurs even without FeBr3 because methoxy activates the ring.", "Para is major because it is less sterically hindered."),
+          card("Nitration of anisole", "Conc. HNO3/H2SO4", "Anisole -> p-nitroanisole (major) + o-nitroanisole", "Electrophilic aromatic substitution", "The methoxy group activates the ring and directs incoming NO2 to ortho and para positions.", "Anisole gives an ortho/para mixture."),
+          card("Friedel-Crafts alkylation of anisole", "RCl, anhydrous AlCl3", "Anisole -> p-alkylanisole (major) + o-isomer", "Electrophilic aromatic substitution by an alkyl electrophile", "The para product generally predominates.", "", {named:true}),
+          card("Friedel-Crafts acylation of anisole", "RCOCl, anhydrous AlCl3", "Anisole -> p-acyl anisole (major) + o-isomer", "Electrophilic aromatic substitution by an acylium ion", "Acylation introduces COR without carbocation rearrangement.", "", {named:true})
+        ]
+      },
+      {
+        title: "Storage Chemistry",
+        rxns: [
+          card("Formation of explosive ether peroxides", "O2/air, light, prolonged storage", "Ether + O2 -> hydroperoxides/peroxides", "Autoxidation through a radical chain process at alpha-carbon", "Old ethers can contain shock-sensitive peroxides and must never be distilled to dryness.", "Important laboratory safety chemistry.", {niche:true})
+        ]
+      }
+    ]
+  },
+  ald: {
+    label: "Aldehydes",
+    groups: [
+      {
+        title: "Nucleophilic Addition",
+        rxns: [
+          card("Cyanohydrin formation", "HCN with KCN/NaCN catalyst", "RCHO + HCN -> RCH(OH)CN", "CN- attacks the carbonyl carbon, then the alkoxide is protonated", "Cyanohydrins are useful for adding one carbon to a chain.", "Aldehydes are generally more reactive than ketones."),
+          card("Sodium bisulphite addition", "Saturated NaHSO3", "RCHO + NaHSO3 -> RCH(OH)SO3Na", "Nucleophilic addition to the carbonyl group", "Most aldehydes form crystalline bisulphite adducts useful for separation and purification.", "The adduct can be decomposed to regenerate the carbonyl compound."),
+          card("Grignard addition", "RMgX, dry ether; then H3O+", "HCHO -> 1 degree alcohol | other RCHO -> 2 degree alcohol", "Nucleophilic addition of the carbanion equivalent to C=O", "Methanal gives a primary alcohol; every other aldehyde gives a secondary alcohol.", "Count the carbon introduced by RMgX."),
+          card("Addition of ammonia derivatives", "NH2OH, NH2NH2, semicarbazide or 2,4-DNP; mild acid", "RCHO -> oxime / hydrazone / semicarbazone / 2,4-DNP hydrazone", "Nucleophilic addition followed by loss of water", "These solid derivatives help identify and characterise carbonyl compounds.", "2,4-DNP is common to aldehydes and ketones.", {tags:["Aldehydes","Ketones"]}),
+          card("Acetal formation", "Excess alcohol, dry HCl or H+", "RCHO + 2ROH <=> RCH(OR)2 + H2O", "Acid-catalysed addition through a hemiacetal intermediate", "Acetals are stable to base and are widely used as carbonyl protecting groups.", "Water and acid reverse the protection.", {niche:true})
+        ]
+      },
+      {
+        title: "Reduction",
+        rxns: [
+          card("Reduction to primary alcohols", "NaBH4, LiAlH4 or H2/Ni", "RCHO + 2[H] -> RCH2OH", "Hydride or catalytic hydrogen addition to C=O", "NaBH4 is mild; LiAlH4 is stronger.", "Aldehyde reduction always gives a primary alcohol."),
+          card("Clemmensen reduction", "Zn(Hg), conc. HCl, heat", "RCHO -> RCH3", "Carbonyl deoxygenation under strongly acidic conditions", "Use for acid-stable substrates.", "Clemmensen is acidic; Wolff-Kishner is basic.", {named:true, tags:["Aldehydes","Ketones"]}),
+          card("Wolff-Kishner reduction", "NH2NH2, KOH, high-boiling solvent, heat", "RCHO -> RCH3 + N2", "Hydrazone formation followed by base-promoted loss of nitrogen", "Use for base-stable substrates.", "Wolff-Kishner is basic; Clemmensen is acidic.", {named:true, tags:["Aldehydes","Ketones"]})
+        ]
+      },
+      {
+        title: "Oxidation and Disproportionation",
+        rxns: [
+          card("Oxidation to carboxylic acids", "KMnO4, K2Cr2O7, Tollens or Fehling reagent", "RCHO + [O] -> RCOOH", "Oxidation of the aldehydic hydrogen", "Aldehydes are oxidised even by mild oxidants; this distinguishes them from most ketones.", "Tollens gives silver mirror; Fehling gives red Cu2O for aliphatic aldehydes."),
+          card("Cannizzaro reaction", "Concentrated NaOH or KOH", "2RCHO -> RCH2OH + RCOO-", "Hydride transfer between two aldehyde molecules", "Only aldehydes without alpha-hydrogen undergo this self oxidation-reduction.", "Methanal and benzaldehyde are standard examples.", {named:true}),
+          card("Crossed Cannizzaro reaction with methanal", "Conc. NaOH; HCHO plus another non-enolisable aldehyde", "HCHO is oxidised to formate; the other aldehyde is reduced to alcohol", "Intermolecular hydride transfer", "Methanal preferentially acts as the reducing agent and is itself oxidised.", "", {named:true, niche:true})
+        ]
+      },
+      {
+        title: "Alpha-Hydrogen Reactions",
+        rxns: [
+          card("Aldol condensation", "Dilute NaOH, then heat", "2CH3CHO -> CH3CH(OH)CH2CHO -> CH3CH=CHCHO + H2O", "Enolate addition to another carbonyl followed by dehydration", "Requires at least one alpha-hydrogen and gives an alpha,beta-unsaturated carbonyl on heating.", "No alpha-H means no aldol.", {named:true, tags:["Aldehydes","Ketones"]}),
+          card("Cross aldol condensation", "Dilute base; two different carbonyl compounds", "Aldehyde/ketone pair -> beta-hydroxy carbonyl -> conjugated carbonyl", "Enolate from one component attacks the other", "A clean product is favoured when only one reactant has alpha-hydrogen.", "", {named:true, tags:["Aldehydes","Ketones"]}),
+          card("Iodoform reaction of ethanal", "I2/NaOH, warm", "CH3CHO + 3I2 + 4NaOH -> CHI3 + HCOONa + 3NaI + 3H2O", "Successive alpha-iodination followed by carbonyl cleavage", "Ethanal is the only aldehyde that gives the iodoform test.", "Yellow CHI3 precipitate.", {named:true, tags:["Aldehydes","Ketones"]})
+        ]
+      },
+      {
+        title: "Aromatic Aldehyde Reactions",
+        rxns: [
+          card("Benzoin condensation", "Aromatic aldehydes, CN- catalyst", "2ArCHO -> ArCH(OH)COAr", "Umpolung through a cyanide-stabilised carbanion equivalent", "Benzaldehyde gives benzoin.", "", {named:true, niche:true}),
+          card("Perkin reaction", "Aromatic aldehyde + acid anhydride, sodium salt of acid, heat", "ArCHO + (RCO)2O -> ArCH=CRCOOH", "Base-generated anhydride enolate condenses with the aldehyde", "Benzaldehyde with acetic anhydride gives cinnamic acid.", "", {named:true, niche:true})
+        ]
+      }
+    ]
+  },
+  ket: {
+    label: "Ketones",
+    groups: [
+      {
+        title: "Nucleophilic Addition",
+        rxns: [
+          card("Cyanohydrin formation", "HCN with KCN/NaCN catalyst", "R2CO + HCN -> R2C(OH)CN", "CN- attacks the carbonyl carbon followed by protonation", "Steric and +I effects make ketones less reactive than aldehydes.", "Reactivity: HCHO > aldehydes > ketones.", {tags:["Aldehydes","Ketones"]}),
+          card("Sodium bisulphite addition", "Saturated NaHSO3", "R2CO + NaHSO3 -> R2C(OH)SO3Na", "Nucleophilic addition to C=O", "Many methyl ketones and unhindered cyclic ketones form crystalline adducts; hindered ketones may not.", "", {tags:["Aldehydes","Ketones"]}),
+          card("Grignard addition", "RMgX, dry ether; then H3O+", "R2CO + R'MgX -> R2C(OH)R'", "Nucleophilic addition of R'- to the carbonyl carbon", "Ketones give tertiary alcohols after hydrolysis.", "Ketone + Grignard = tertiary alcohol."),
+          card("Addition of ammonia derivatives", "NH2OH, NH2NH2, semicarbazide or 2,4-DNP; mild acid", "R2CO -> oxime / hydrazone / semicarbazone / 2,4-DNP hydrazone", "Nucleophilic addition-elimination", "The derivatives are often crystalline and useful for identification.", "2,4-DNP gives an orange/yellow precipitate.", {tags:["Aldehydes","Ketones"]}),
+          card("Ketal formation", "Excess alcohol or ethylene glycol, dry H+", "R2CO + 2ROH <=> R2C(OR)2 + H2O", "Acid-catalysed addition through a hemiketal", "Cyclic ketals from ethylene glycol are common protecting groups.", "", {niche:true})
+        ]
+      },
+      {
+        title: "Reduction and Oxidation",
+        rxns: [
+          card("Reduction to secondary alcohols", "NaBH4, LiAlH4 or H2/Ni", "R2CO + 2[H] -> R2CHOH", "Hydride or catalytic hydrogen addition", "Reduction of a ketone always gives a secondary alcohol.", "NaBH4 is selective for ordinary aldehydes and ketones."),
+          card("Clemmensen reduction", "Zn(Hg), conc. HCl, heat", "RCOR' -> RCH2R'", "Carbonyl deoxygenation in acid", "Useful when the rest of the molecule tolerates strong acid.", "Clemmensen acidic, Wolff-Kishner basic.", {named:true, tags:["Aldehydes","Ketones"]}),
+          card("Wolff-Kishner reduction", "NH2NH2, KOH, heat", "RCOR' -> RCH2R' + N2", "Hydrazone formation and base-promoted nitrogen loss", "Useful when the molecule tolerates strong base and heat.", "", {named:true, tags:["Aldehydes","Ketones"]}),
+          card("Vigorous oxidation and C-C cleavage", "Hot KMnO4 or conc. HNO3", "Ketone -> mixture of smaller carboxylic acids", "Oxidative cleavage of carbon-carbon bonds next to C=O", "Ketones resist mild oxidants but strong oxidation cleaves the carbon skeleton.", "This contrasts with easy aldehyde oxidation."),
+          card("Baeyer-Villiger oxidation", "Peracid such as mCPBA", "Ketone -> ester | cyclic ketone -> lactone", "Peracid addition followed by migration to oxygen", "Migratory aptitude usually favours the group best able to stabilise positive charge.", "", {named:true, niche:true})
+        ]
+      },
+      {
+        title: "Alpha-Hydrogen Reactions",
+        rxns: [
+          card("Aldol condensation of ketones", "Dilute base, then heat", "2 ketone molecules -> beta-hydroxy ketone -> alpha,beta-unsaturated ketone", "Enolate addition and dehydration", "Ketones with alpha-hydrogen undergo aldol, though often less readily than aldehydes.", "Alpha-H is compulsory.", {named:true, tags:["Aldehydes","Ketones"]}),
+          card("Cross aldol condensation", "Dilute base; aldehyde/ketone pair", "Carbonyl pair -> beta-hydroxy carbonyl -> conjugated product", "Enolate from one partner attacks the other carbonyl", "Aromatic aldehydes without alpha-H often give clean crossed products with ketones.", "", {named:true, tags:["Aldehydes","Ketones"]}),
+          card("Haloform or iodoform reaction", "I2/NaOH, warm", "RCOCH3 + 3I2 + 4NaOH -> RCOONa + CHI3 + 3NaI + 3H2O", "Exhaustive alpha-iodination followed by nucleophilic acyl cleavage", "Methyl ketones give yellow iodoform precipitate.", "Look for CH3CO- or CH3CH(OH)- in the starting compound.", {named:true})
+        ]
+      }
+    ]
+  },
+  carb: {
+    label: "Carboxylic Acids",
+    groups: [
+      {
+        title: "Acidic Reactions",
+        rxns: [
+          card("Reaction with metals, bases and carbonates", "Na; NaOH; Na2CO3 or NaHCO3", "2RCOOH + 2Na -> 2RCOONa + H2 | RCOOH + NaHCO3 -> RCOONa + CO2 + H2O", "Acid-base reactions forming resonance-stabilised carboxylates", "Brisk CO2 with bicarbonate distinguishes carboxylic acids from phenols and alcohols.", "NaHCO3 is the most selective quick test here."),
+          card("Effect of substituents on acidity", "Compare substituted acids in water", "Electron-withdrawing group -> stronger acid; electron-donating group -> weaker acid", "Inductive stabilisation or destabilisation of the carboxylate ion", "The -I effect decreases with distance from COOH. Halogen effect: F > Cl > Br > I.", "More stable carboxylate means stronger acid.")
+        ]
+      },
+      {
+        title: "Carboxyl Group Transformations",
+        rxns: [
+          card("Fischer esterification", "Alcohol, conc. H2SO4, heat", "RCOOH + R'OH <=> RCOOR' + H2O", "Acid-catalysed nucleophilic acyl substitution", "The reversible equilibrium is shifted by excess alcohol or removal of water.", "The reverse acid reaction is ester hydrolysis.", {named:true, tags:["Alcohols","Carboxylic Acids"]}),
+          card("Formation of acid chlorides", "SOCl2, PCl5 or PCl3", "RCOOH + SOCl2 -> RCOCl + SO2 + HCl", "Replacement of the carboxyl -OH by chlorine", "SOCl2 is preferred because both by-products are gases.", "Acid chloride is the most reactive common acid derivative."),
+          card("Formation of amides with ammonia", "NH3, then heat", "RCOOH + NH3 -> RCOO-NH4+ -> RCONH2 + H2O", "Salt formation followed by dehydration", "Primary amides are obtained by heating ammonium carboxylates.", "Acid + amine first gives a salt."),
+          card("Reduction to primary alcohols", "LiAlH4, dry ether; then H3O+", "RCOOH + 4[H] -> RCH2OH + H2O", "Multiple hydride transfers through an aldehyde equivalent", "NaBH4 does not normally reduce carboxylic acids.", "LiAlH4 reduces acids all the way to primary alcohols.")
+        ]
+      },
+      {
+        title: "Carbon-Skeleton Reactions",
+        rxns: [
+          card("Soda-lime decarboxylation", "Sodium carboxylate, NaOH/CaO, heat", "RCOONa + NaOH -> RH + Na2CO3", "Loss of CO2 from the carboxylate-derived intermediate", "The alkane product has one carbon fewer than the acid.", "Decarboxylation shortens the chain by one."),
+          card("Kolbe electrolysis", "Electrolysis of aqueous sodium/potassium carboxylate", "2RCOO- -> R-R + 2CO2 + 2e-", "Anodic decarboxylation gives radicals that couple", "Usually gives a symmetrical alkane with an even number of carbons.", "Kolbe electrolysis makes R-R; Kolbe-Schmitt makes salicylic acid.", {named:true}),
+          card("Dry distillation of calcium carboxylates", "Calcium carboxylate, strong heat", "(RCOO)2Ca -> RCOR + CaCO3", "Ketonic decarboxylation", "A calcium salt of a monocarboxylic acid gives a symmetrical ketone; calcium formate mixed salts can give aldehydes.", "", {niche:true, tags:["Carboxylic Acids","Ketones"]}),
+          card("Hell-Volhard-Zelinsky reaction", "Br2/red P or Cl2/red P; then H2O", "RCH2COOH -> RCHXCOOH", "Acid is converted to an acyl halide, enolised, alpha-halogenated, then hydrolysed", "Only acids with at least one alpha-hydrogen undergo the reaction.", "HVZ means alpha-halogenation of a carboxylic acid.", {named:true})
+        ]
+      }
+    ]
+  },
+  amines: {
+    label: "Amines",
+    groups: [
+      {
+        title: "Basicity and Alkylation",
+        rxns: [
+          card("Salt formation with acids", "HCl, H2SO4 or other mineral acid", "RNH2 + HCl -> RNH3+Cl-", "Protonation of the nitrogen lone pair", "Amine salts are generally water soluble; adding base regenerates the free amine.", "This is the basis of acid-base extraction of amines."),
+          card("Relative basicity", "Compare Kb/pKb in water", "Aliphatic amines generally > NH3 > aniline", "Inductive effects, resonance and solvation control availability of the lone pair", "In aqueous solution the order among simple methyl amines is affected by solvation; aniline is weaker because its lone pair is delocalised.", "Do not apply only the +I effect without considering solvation."),
+          card("Alkylation", "Alkyl halide, heat", "RNH2 -> R2NH -> R3N -> R4N+X-", "Successive SN2 alkylation at nitrogen", "A mixture results because each amine product remains nucleophilic; excess NH3 favours primary amine.", "Excess alkyl halide drives quaternary salt formation.")
+        ]
+      },
+      {
+        title: "Acylation and Sulphonylation",
+        rxns: [
+          card("Acylation of primary and secondary amines", "RCOCl or (RCO)2O; base", "RNH2 -> RNHCO-R' | R2NH -> R2NCO-R'", "Nucleophilic acyl substitution", "Tertiary amines do not acylate because they have no N-H bond.", "Acetylation is used to protect aniline and control ring substitution."),
+          card("Schotten-Baumann benzoylation", "Benzoyl chloride, aqueous NaOH", "Amine + C6H5COCl -> benzamide derivative", "Nucleophilic acyl substitution while base neutralises HCl", "Primary and secondary amines form benzamides.", "", {named:true}),
+          card("Hinsberg reaction", "Benzenesulphonyl chloride, aqueous NaOH", "1 degree/2 degree amines -> sulphonamides; 3 degree amines -> no sulphonamide", "Nucleophilic substitution at sulphur", "Primary sulphonamide is alkali soluble; secondary sulphonamide is insoluble.", "This reaction is also the standard classification test.", {named:true})
+        ]
+      },
+      {
+        title: "Nitrous Acid Reactions",
+        rxns: [
+          card("Primary aliphatic amines with nitrous acid", "NaNO2/HCl, 273-278 K", "RNH2 -> unstable RN2+ -> ROH + N2", "Diazotisation followed by rapid loss of nitrogen and solvolysis", "Brisk nitrogen evolution occurs and the corresponding alcohol is formed.", "Aliphatic diazonium salts are too unstable to isolate."),
+          card("Diazotisation of primary aromatic amines", "NaNO2/HCl, 273-278 K", "ArNH2 -> ArN2+Cl-", "Nitrosonium electrophile converts the amine to a diazonium salt", "Arenediazonium salts are stable only at low temperature and are used immediately.", "Keep the temperature at 0-5 degree C.", {named:true}),
+          card("Secondary amines with nitrous acid", "NaNO2/HCl, cold", "R2NH + HONO -> R2N-NO + H2O", "N-nitrosation", "Secondary amines form yellow oily N-nitrosamines.", "This observation helps distinguish amine classes."),
+          card("Tertiary amines with nitrous acid", "NaNO2/HCl, cold", "R3N + HONO -> R3NH+NO2- (aliphatic)", "Salt formation; aromatic tertiary amines may undergo ring nitrosation", "Aliphatic tertiary amines do not evolve N2 or form N-nitrosamines because there is no N-H.", "No gas is the key contrast with primary aliphatic amines.")
+        ]
+      },
+      {
+        title: "Aromatic Amine Ring Reactions",
+        rxns: [
+          card("Bromination of aniline", "Bromine water, room temperature", "Aniline + 3Br2 -> 2,4,6-tribromoaniline + 3HBr", "Fast electrophilic aromatic substitution", "A white precipitate forms without a Lewis acid catalyst.", "Protect -NH2 by acetylation when mono-bromination is required."),
+          card("Controlled bromination through acetanilide", "Ac2O; then Br2/AcOH; hydrolysis", "Aniline -> acetanilide -> p-bromoacetanilide -> p-bromoaniline", "Protection reduces ring activation and steric effects favour para substitution", "Acetylation prevents uncontrolled 2,4,6-tribromination.", "Protection-deprotection is a standard named-reaction strategy."),
+          card("Nitration of aniline via protection", "Ac2O; HNO3/H2SO4; then hydrolysis", "Aniline -> acetanilide -> p-nitroacetanilide -> p-nitroaniline", "Electrophilic substitution after reducing the basicity/reactivity of nitrogen", "Direct nitration protonates aniline to meta-directing anilinium ion and gives a mixture.", "Protect first for mainly para nitration."),
+          card("Sulphonation to sulphanilic acid", "Conc. H2SO4, heat", "Aniline -> anilinium hydrogensulphate -> p-H2NC6H4SO3H", "Electrophilic aromatic substitution after salt formation", "The product exists as a zwitterion.", "Sulphanilic acid is para-aminobenzenesulphonic acid.")
+        ]
+      },
+      {
+        title: "Diazonium Named Reactions",
+        rxns: [
+          card("Sandmeyer reaction", "CuCl, CuBr or CuCN", "ArN2+ -> ArCl / ArBr / ArCN + N2", "Copper(I)-assisted radical substitution", "Replaces diazonium by Cl, Br or CN.", "CuX is the giveaway reagent.", {named:true}),
+          card("Gattermann diazonium substitution", "HCl or HBr, copper powder", "ArN2+ -> ArCl or ArBr + N2", "Copper-assisted substitution", "A modification of Sandmeyer using copper powder and the corresponding acid.", "", {named:true}),
+          card("Balz-Schiemann reaction", "HBF4; isolate ArN2+BF4-, then heat", "ArN2+BF4- -> ArF + BF3 + N2", "Thermal decomposition of diazonium tetrafluoroborate", "The standard route to aryl fluorides.", "ArF from diazonium means Balz-Schiemann.", {named:true}),
+          card("Hydrolysis of diazonium salts", "Warm water or dilute acid", "ArN2+Cl- + H2O -> ArOH + N2 + HCl", "Substitution of diazonium by hydroxyl", "Connects aromatic primary amines to phenols.", "Warm the cold diazonium solution."),
+          card("Reduction of diazonium to arene", "H3PO2 or ethanol", "ArN2+ -> ArH + N2", "Radical replacement of diazonium by hydrogen", "Useful for removing an amino group after it has directed substitution.", "Diazotise, then H3PO2 to deaminate."),
+          card("Azo coupling", "Phenol in alkali or aniline in weakly acidic medium", "ArN2+ + activated arene -> Ar-N=N-Ar'", "Electrophilic aromatic substitution", "Strongly coloured azo dyes form, usually at the para position.", "Phenol couples alkaline; aniline couples mildly acidic.", {named:true, tags:["Amines","Phenols"]})
+        ]
+      },
+      {
+        title: "Diagnostic Reaction",
+        rxns: [
+          card("Carbylamine reaction", "CHCl3, alcoholic KOH, heat", "RNH2 + CHCl3 + 3KOH -> RNC + 3KCl + 3H2O", "Dichlorocarbene formation followed by conversion of a primary amine to isocyanide", "Only primary aliphatic and aromatic amines respond.", "The foul-smelling isocyanide must never be smelled directly.", {named:true})
+        ]
+      }
+    ]
+  }
+};
+
+const testData = {
+  alcohols: {
+    label: "Alcohols",
+    groups: [
+      {
+        title: "Detection and Classification",
+        rxns: [
+          card("Lucas test", "Conc. HCl + anhydrous ZnCl2, room temperature", "ROH -> insoluble RCl", "Immediate turbidity: 3 degree; turbidity in about 5 min: 2 degree; no turbidity at room temperature: 1 degree", "Benzylic and allylic alcohols may react unusually fast, so interpret structure before using the timing rule.", "A named high-yield classification test.", {named:true}),
+          card("Ceric ammonium nitrate test", "Ceric ammonium nitrate in dilute HNO3", "Alcohol-Ce(IV) complex forms", "Yellow reagent develops a red/orange colour", "Useful as a preliminary test for many alcohols; some other oxygen compounds can interfere.", "", {niche:true}),
+          card("Chromic acid or Jones test", "CrO3/H2SO4 or acidified K2Cr2O7", "1 degree/2 degree alcohol is oxidised; Cr(VI) -> Cr(III)", "Orange solution turns green for primary and secondary alcohols; tertiary alcohols are usually negative", "Aldehydes also give a positive result, so this is not alcohol-specific.", "Useful for separating oxidisable from tertiary alcohols."),
+          card("Iodoform test for ethanol and methyl carbinols", "I2/NaOH, warm", "CH3CH(OH)R -> CHI3 + carboxylate", "Pale yellow precipitate of iodoform with characteristic antiseptic odour", "Positive for ethanol and secondary alcohols containing CH3CH(OH)-.", "Methanol and most primary alcohols are negative.", {named:true, tags:["Alcohols","Ketones"]}),
+          card("Victor Meyer test", "Convert alcohol to iodide, then nitro compound; treat with HNO2 and alkali", "Different coloured nitro derivatives form", "1 degree: blood red; 2 degree: blue; 3 degree: no colour", "A classical multistep distinction of primary, secondary and tertiary alcohols.", "", {named:true, niche:true})
+        ]
+      }
+    ]
+  },
+  phenols: {
+    label: "Phenols",
+    groups: [
+      {
+        title: "Phenolic Group Tests",
+        rxns: [
+          card("Neutral ferric chloride test", "Fresh neutral FeCl3 solution", "Phenol + Fe3+ -> coloured ferric phenolate complex", "Violet, blue, green or red colour depending on the phenol", "Enols and hydroxamic acids can also respond, so confirm with another test.", "Simple phenol commonly gives violet colour."),
+          card("Bromine water test", "Bromine water at room temperature", "Phenol -> 2,4,6-tribromophenol", "Bromine water is decolourised and a white precipitate forms", "Aniline also decolourises bromine water with a white tribromo precipitate.", "Use FeCl3 or acidity behaviour to distinguish phenol from aniline."),
+          card("Solubility in sodium hydroxide", "Dilute aqueous NaOH, then acidify", "ArOH -> ArONa (soluble); H+ -> ArOH", "Phenol dissolves in NaOH and reappears on acidification", "Ordinary alcohols do not dissolve by salt formation; carboxylic acids also dissolve.", "Phenol is NaOH positive but NaHCO3 negative."),
+          card("Liebermann nitroso test", "NaNO2 + conc. H2SO4; dilute; then add NaOH", "Nitroso/indophenol-type coloured species form", "Deep blue/green, turns red on dilution, and blue/green again with alkali", "A classical confirmatory phenol test.", "", {named:true, niche:true})
+        ]
+      }
+    ]
+  },
+  ethers: {
+    label: "Ethers",
+    groups: [
+      {
+        title: "Indirect Identification",
+        rxns: [
+          card("HI cleavage test", "Heat with concentrated HI", "ROR' + HI -> RI + R'OH", "Formation of an alkyl iodide and alcohol/phenol after cleavage", "Ethers have no strong simple colour test; cleavage products are identified instead.", "Aryl-alkyl ether gives phenol plus alkyl iodide."),
+          card("Peroxide test for stored ethers", "Acidified KI, then starch; or ferrous thiocyanate reagent", "Ether peroxide oxidises I- to I2", "Blue starch-iodine colour, or red ferric thiocyanate colour", "This is a safety check before concentrating or distilling an old ether sample.", "Never distil peroxide-containing ether to dryness.", {niche:true})
+        ]
+      }
+    ]
+  },
+  ald: {
+    label: "Aldehydes",
+    groups: [
+      {
+        title: "Carbonyl and Aldehyde Tests",
+        rxns: [
+          card("2,4-DNP or Brady's test", "2,4-Dinitrophenylhydrazine in acidic alcohol", "C=O compound -> 2,4-DNP hydrazone + H2O", "Yellow, orange or red crystalline precipitate", "Positive for both aldehydes and ketones; negative for ordinary alcohols, acids and ethers.", "Confirms a carbonyl, not specifically an aldehyde.", {named:true, tags:["Aldehydes","Ketones"]}),
+          card("Tollens' silver mirror test", "Fresh ammoniacal AgNO3, warm water bath", "RCHO + 2[Ag(NH3)2]+ -> RCOO- + 2Ag", "Silver mirror or grey-black silver deposit", "Most aldehydes are positive; alpha-hydroxy ketones can also reduce Tollens reagent.", "Prepare fresh and do not store Tollens reagent.", {named:true}),
+          card("Fehling's test", "Fresh Fehling A + Fehling B, warm", "Aliphatic RCHO reduces Cu2+ -> Cu2O", "Brick-red precipitate of Cu2O", "Usually positive for aliphatic aldehydes and reducing sugars; aromatic aldehydes are generally negative.", "Tollens works for benzaldehyde; Fehling usually does not.", {named:true}),
+          card("Schiff's reagent test", "Decolourised Schiff reagent", "Aldehyde restores the conjugated dye system", "Pink or magenta colour develops", "Most aldehydes respond rapidly; ketones are generally negative or very slow.", "A useful aldehyde-versus-ketone test.", {named:true}),
+          card("Iodoform test for ethanal", "I2/NaOH, warm", "CH3CHO -> CHI3 + HCOO-", "Yellow precipitate of CHI3", "Ethanal is the only common aldehyde that responds.", "A positive iodoform result does not prove the sample is a ketone.", {named:true, tags:["Aldehydes","Ketones"]})
+        ]
+      }
+    ]
+  },
+  ket: {
+    label: "Ketones",
+    groups: [
+      {
+        title: "Carbonyl and Methyl Ketone Tests",
+        rxns: [
+          card("2,4-DNP or Brady's test", "2,4-Dinitrophenylhydrazine in acidic alcohol", "C=O compound -> 2,4-DNP hydrazone + H2O", "Yellow, orange or red crystalline precipitate", "Positive for aldehydes and ketones.", "Follow with Tollens or Schiff to distinguish the two.", {named:true, tags:["Aldehydes","Ketones"]}),
+          card("Tollens and Fehling comparison", "Tollens reagent and Fehling solution", "Ordinary ketone -> no oxidation under test conditions", "No silver mirror and no brick-red Cu2O precipitate", "Alpha-hydroxy ketones are an important exception and may reduce Tollens/Fehling reagents.", "Negative mild oxidation plus positive 2,4-DNP supports a ketone."),
+          card("Iodoform test for methyl ketones", "I2/NaOH, warm", "RCOCH3 -> RCOO- + CHI3", "Pale yellow crystalline precipitate of iodoform", "Positive for methyl ketones and compounds oxidisable to them.", "The structural clue is CH3CO-.", {named:true}),
+          card("Sodium nitroprusside test", "Sodium nitroprusside + NaOH; then acidify", "Enolate of a methyl ketone forms a coloured complex", "Red colour in alkali, often changing on acidification", "A classical test for methyl ketones, especially acetone.", "", {niche:true})
+        ]
+      }
+    ]
+  },
+  carb: {
+    label: "Carboxylic Acids",
+    groups: [
+      {
+        title: "Carboxyl Group Tests",
+        rxns: [
+          card("Sodium bicarbonate test", "Aqueous NaHCO3", "RCOOH + NaHCO3 -> RCOONa + CO2 + H2O", "Immediate brisk effervescence; evolved CO2 turns limewater milky", "Phenols and ordinary alcohols do not liberate CO2 from bicarbonate.", "The cleanest quick test for a carboxylic acid."),
+          card("Litmus and water-solubility check", "Moist blue litmus; water", "RCOOH <=> RCOO- + H+", "Blue litmus turns red; lower acids are water soluble", "This is only preliminary because many acidic substances affect litmus.", "Confirm with NaHCO3."),
+          card("Ester test", "Ethanol + a few drops conc. H2SO4; warm in water bath", "RCOOH + C2H5OH <=> RCOOC2H5 + H2O", "A fruity-smelling ester is formed", "Use only as a controlled laboratory observation; do not directly inhale vapours.", "Often used as a confirmatory test after bicarbonate.")
+        ]
+      }
+    ]
+  },
+  amines: {
+    label: "Amines",
+    groups: [
+      {
+        title: "Amine Detection and Classification",
+        rxns: [
+          card("Carbylamine test", "CHCl3 + alcoholic KOH, heat", "RNH2 -> RNC", "Only a primary amine forms a highly unpleasant-smelling isocyanide", "Positive for both aliphatic and aromatic primary amines; secondary and tertiary amines are negative.", "Never smell the product directly.", {named:true}),
+          card("Hinsberg test", "Benzenesulphonyl chloride + aqueous NaOH", "1 degree -> soluble sulphonamide salt; 2 degree -> insoluble sulphonamide; 3 degree -> no sulphonamide", "Primary product dissolves in alkali and precipitates on acidification; secondary product remains insoluble; tertiary amine dissolves only after acidification", "A complete classification test for primary, secondary and tertiary amines.", "", {named:true}),
+          card("Nitrous acid test", "Fresh HNO2 from NaNO2/HCl, 273-278 K", "Amine class determines diazonium, nitrosamine or salt product", "1 degree aliphatic: N2 gas; 1 degree aromatic: cold diazonium solution; 2 degree: yellow oily nitrosamine; 3 degree: no N2", "Aromatic tertiary amines can undergo ring nitrosation.", "Observe temperature carefully."),
+          card("Azo dye test for primary aromatic amines", "Diazotise with NaNO2/HCl at 0-5 degree C; couple with beta-naphthol/NaOH", "ArNH2 -> ArN2+ -> azo dye", "Orange, red or scarlet dye forms", "Confirms a primary aromatic amine after successful diazotisation.", "Cold diazotisation is essential.", {named:true}),
+          card("Bromine water test for aniline", "Bromine water", "C6H5NH2 -> 2,4,6-tribromoaniline", "Bromine water decolourises and a white precipitate forms", "Phenol gives a similar observation; use acid solubility or FeCl3 to distinguish them.", "Aniline dissolves in dilute HCl as anilinium salt.")
+        ]
+      }
+    ]
+  }
+};
+
+const datasets = {
+  preparations: {label: "Preparations", data},
+  properties: {label: "Chemical Properties", data: propertyData},
+  tests: {label: "Tests", data: testData}
 };
 
 let currentTab = 'all';
@@ -464,7 +1052,7 @@ function showTab(tab) {
 }
 
 function getTabLabel(tab) {
-  const map = {all:'All',alcohols:'Alcohols',phenols:'Phenols',ethers:'Ethers',ald:'Aldehydes',ket:'Ketones',carb:'Carboxylic Acids'};
+  const map = {all:'All',alcohols:'Alcohols',phenols:'Phenols',ethers:'Ethers',ald:'Aldehydes',ket:'Ketones',carb:'Carboxylic Acids',amines:'Amines'};
   return map[tab] || tab;
 }
 
@@ -528,18 +1116,140 @@ function toggle(id) {
   detail.classList.toggle('open');
 }
 
-renderAll('all','');
+let currentSection = 'preparations';
+let cardId = 0;
 
-// Fix tab active state
-document.querySelectorAll('.tab').forEach((t,i) => {
-  t.onclick = function() {
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-    t.classList.add('active');
-    const tabs = ['all','alcohols','phenols','ethers','ald','ket','carb'];
-    currentTab = tabs[i];
-    document.getElementById('search').value = '';
-    renderAll(currentTab,'');
+const categoryOrder = ['alcohols','phenols','ethers','ald','ket','carb','amines'];
+const categoryLabels = {
+  all: 'All',
+  alcohols: 'Alcohols',
+  phenols: 'Phenols',
+  ethers: 'Ethers',
+  ald: 'Aldehydes',
+  ket: 'Ketones',
+  carb: 'Carboxylic Acids',
+  amines: 'Amines'
+};
+
+function showTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(button => {
+    button.classList.toggle('active', button.textContent.trim() === categoryLabels[tab]);
+  });
+  filterSearch();
+}
+
+function showSection(sectionKey) {
+  currentSection = sectionKey;
+  document.querySelectorAll('.section-tab').forEach(button => {
+    const active = button.dataset.section === sectionKey;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-selected', String(active));
+  });
+  filterSearch();
+}
+
+function filterSearch() {
+  const query = document.getElementById('search').value.toLowerCase().trim();
+  renderAll(currentTab, query);
+}
+
+function escapeHtml(value) {
+  return value.replace(/[&<>"']/g, character => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  })[character]);
+}
+
+function renderCard(rxn, datasetKey) {
+  cardId += 1;
+  const id = `rxn-${cardId}`;
+  const isTest = datasetKey === 'tests';
+  const sourceBadges = (rxn.categoryTags || [])
+    .map(tag => `<span class="section-badge">${tag}</span>`)
+    .join('');
+
+  return `<div class="rxn" id="${id}" onclick="toggle('${id}')">
+    <div class="rxn-header">
+      <div>
+        <div class="rxn-name">${rxn.name}</div>
+        <div class="rxn-reagents">${rxn.reagents}</div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-wrap:wrap;flex-shrink:0">
+        ${sourceBadges}
+        ${rxn.named ? `<span class="named-badge">Named</span>` : ''}
+        ${rxn.niche ? `<span class="niche-badge">Niche</span>` : ''}
+        <i class="ti ti-chevron-down chevron" aria-hidden="true"></i>
+      </div>
+    </div>
+    <div class="rxn-detail" id="detail-${id}">
+      <div class="detail-row"><span class="detail-label">${isTest ? 'Test reaction' : 'Reaction'}</span><div class="reaction-box">${rxn.equation}</div></div>
+      <div class="detail-row"><span class="detail-label">${isTest ? 'Positive result' : 'Mechanism'}</span><span class="detail-val">${rxn.mechanism}</span></div>
+      ${rxn.note ? `<div class="detail-row"><span class="detail-label">Key point</span><span class="detail-val">${rxn.note}</span></div>` : ''}
+      ${rxn.tip ? `<div class="tip"><i class="ti ti-bulb" aria-hidden="true"></i> NEET tip: ${rxn.tip}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+function renderAll(tab, query) {
+  const container = document.getElementById('content');
+  const searching = Boolean(query);
+  const datasetKeys = searching ? Object.keys(datasets) : [currentSection];
+  const categoryKeys = searching
+    ? categoryOrder
+    : (tab === 'all' ? categoryOrder : [tab]);
+  let html = '';
+  cardId = 0;
+
+  datasetKeys.forEach(datasetKey => {
+    const dataset = datasets[datasetKey];
+    categoryKeys.forEach(categoryKey => {
+      const category = dataset.data[categoryKey];
+      if(!category) return;
+
+      category.groups.forEach(group => {
+        let groupHtml = '';
+        group.rxns.forEach(rxn => {
+          const searchable = [
+            dataset.label,
+            category.label,
+            group.title,
+            rxn.name,
+            rxn.reagents,
+            rxn.equation,
+            rxn.note,
+            rxn.mechanism,
+            rxn.tip,
+            ...(rxn.categoryTags || [])
+          ].join(' ').toLowerCase();
+
+          if(searching && !searchable.includes(query)) return;
+          groupHtml += renderCard(rxn, datasetKey);
+        });
+
+        if(groupHtml) {
+          let title = group.title;
+          if(searching) title = `${dataset.label} / ${category.label} - ${group.title}`;
+          else if(tab === 'all') title = `${category.label} - ${group.title}`;
+          html += `<div class="group"><div class="group-title">${title}</div>${groupHtml}</div>`;
+        }
+      });
+    });
+  });
+
+  if(!html) {
+    html = `<div class="no-results">No entries found for "<strong>${escapeHtml(query)}</strong>"</div>`;
   }
+  container.innerHTML = html;
+}
+
+document.querySelectorAll('.section-tab').forEach(button => {
+  button.addEventListener('click', () => showSection(button.dataset.section));
 });
+
+renderAll('all','');
 </script>
 </body></html>
